@@ -1,0 +1,13 @@
+# jupyter notebook checkpoints
+.ipynb_checkpoints
+**/.ipynb_checkpoints/
+
+# idea pycharm project files
+*.idea/
+
+# cache
+src/**/__pycache__/
+
+# Build artifacts
+*.egg-info/
+**/*.egg-info/
