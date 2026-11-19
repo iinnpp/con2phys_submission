@@ -5,7 +5,7 @@ suppressPackageStartupMessages({
 })
 
 data_path <- "E:/con2phys_submission/questions/q1/fr.csv"
-results_path <- "E:/con2phys_submission/questions/q1/fr_log_mixed_model_results.txt"
+results_path <- "D:/git_repos/con2phys_submission/results/q1/fr_log_mixed_model_results.txt"
 sink(results_path)
 
 fr <- read.csv(data_path)
