@@ -1,13 +1,20 @@
 Firing rate was calculated for each unit over the entire recording as the total number of spikes divided by the recording duration. 
-Recording duration was taken as a length of corresponding LFP signal. All 1449 units from 18 mice were included (area 1 649 units, area 2 478, area 3 322). 
+Recording duration was derived from the length of the corresponding LFP signal. All 1,449 units from 18 mice were included (area 1: 649 units; 
+area 2: 478; area 3: 322).
 
+Because unit-level firing rates were strictly positive and strongly right-skewed, firing rate was log-transformed before statistical analysis. 
 I fitted a linear mixed-effects model with brain area as a fixed effect and mouse_id as a random intercept to account for units recorded from the same mouse. 
-The model showed an overall effect of brain area on firing rate (p < 10^-7). Model-estimated mean firing rates were 7.81 Hz for area 1 (95% CI: 7.11–8.51), 
-5.67 Hz for area 2 (4.92–6.43), and 6.96 Hz for area 3 (6.12–7.80). 
+The model showed an overall effect of brain area on log firing rate (p < 2.2 x 10^-16). Back-transformed model estimates, 
+interpreted as geometric mean firing rates, were 5.98 Hz for area 1 (95% CI: 5.31-6.74), 3.33 Hz for area 2 (2.93-3.78), and 4.44 Hz for area 3 (3.87-5.11).
+Those values are in the table above.
 
-Tukey-adjusted pairwise comparisons showed that area 2 had a lower firing rate than both area 1 (p<0.0001) and area 3 (p=0.0113), therefore, 
-brain area 2 had the lowest firing rate. The difference between area 1 and 3 was not significant.
+Tukey-adjusted pairwise comparisons were performed on the log scale and are reported as ratios of geometric means. Area 1 was 1.80 times higher than area 2 
+(95% CI: 1.57-2.06, p < 0.0001), area 1 was 1.35 times higher than area 3 (1.15-1.57, p < 0.0001), and area 2 was 0.75 times area 3 (0.64-0.88, p = 0.0001). 
+Therefore, brain area 2 had the lowest firing rate.
 
-Code: \code\questions\q1.r, code\questions\q1.ipynb
+The analysis of untransformed firing rates led to the same conclusion that area 2 had the lowest firing rate, although the difference between areas 1 and 3 
+was not statistically significant.
 
-Stats output: results\questions\fr_mixed_model_results.txt
+Code: D:\git_repos\con2phys_submission\code\questions\q1_log.r, D:\git_repos\con2phys_submission\code\questions\q1.ipynb
+
+Model output: E:\con2phys_submission\questions\q1\fr_log_mixed_model_results.txt
