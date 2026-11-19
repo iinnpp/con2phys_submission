@@ -1,0 +1,13 @@
+Firing rate was calculated for each unit over the entire recording as the total number of spikes divided by the recording duration. 
+Recording duration was taken as a length of corresponding LFP signal. All 1449 units from 18 mice were included (area 1 649 units, area 2 478, area 3 322). 
+
+I fitted a linear mixed-effects model with brain area as a fixed effect and mouse_id as a random intercept to account for units recorded from the same mouse. 
+The model showed an overall effect of brain area on firing rate (p < 10^-7). Model-estimated mean firing rates were 7.81 Hz for area 1 (95% CI: 7.11–8.51), 
+5.67 Hz for area 2 (4.92–6.43), and 6.96 Hz for area 3 (6.12–7.80). 
+
+Tukey-adjusted pairwise comparisons showed that area 2 had a lower firing rate than both area 1 (p<0.0001) and area 3 (p=0.0113), therefore, 
+brain area 2 had the lowest firing rate. The difference between area 1 and 3 was not significant.
+
+Code: \code\questions\q1.r, code\questions\q1.ipynb
+
+Stats output: results\questions\fr_mixed_model_results.txt

@@ -1,0 +1,58 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: fr_hz ~ brain_area + (1 | mouse_id)
+   Data: fr
+
+REML criterion at convergence: 9368
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.3895 -0.6481 -0.2536  0.3920  9.6250 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ mouse_id (Intercept)  1.025   1.012   
+ Residual             37.138   6.094   
+Number of obs: 1449, groups:  mouse_id, 18
+
+Fixed effects:
+             Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)    7.8117     0.3441   33.5053  22.703  < 2e-16 ***
+brain_area2   -2.1385     0.3751 1435.9408  -5.700 1.45e-08 ***
+brain_area3   -0.8496     0.4259 1436.3269  -1.995   0.0462 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) brn_r2
+brain_area2 -0.464       
+brain_area3 -0.418  0.383
+
+Overall effect of brain area
+Type III Analysis of Variance Table with Satterthwaite's method
+           Sum Sq Mean Sq NumDF DenDF F value    Pr(>F)    
+brain_area 1208.3  604.16     2  1439  16.268 1.032e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated area means and 95% confidence intervals
+ brain_area   emmean        SE    df lower.CL upper.CL
+ 1          7.811714 0.3447941 31.63 7.109071 8.514357
+ 2          5.673234 0.3741114 43.27 4.918905 6.427563
+ 3          6.962072 0.4215186 70.29 6.121440 7.802703
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+Tukey adjusted pairwise contrasts
+ contrast                    estimate        SE      df   lower.CL   upper.CL t.ratio p.value
+ brain_area1 - brain_area2  2.1384798 0.3760455 1435.34  1.2562247  3.0207350   5.687  <.0001
+ brain_area1 - brain_area3  0.8496422 0.4269773 1435.74 -0.1521057  1.8513901   1.990  0.1150
+ brain_area2 - brain_area3 -1.2888376 0.4476908 1444.70 -2.3391754 -0.2384999  -2.879  0.0113
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+P value adjustment: tukey method for comparing a family of 3 estimates 
+
+Saved plot to E:/con2phys_submission/questions/q1/fr_mixed_model_mean_and_95_ci.png 
+Saved contrast plot to E:/con2phys_submission/questions/q1/fr_mixed_model_pairwise_contrasts.png 
