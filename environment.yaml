@@ -1,12 +1,23 @@
 name: con2phys
+channels:
+  - conda-forge
 dependencies:
-  - python
+  - python>=3.10
   - pip
+  - git
+
+  # Python runtime and notebooks
+  - jupyterlab
+  - ipykernel
   - matplotlib
-  - seaborn
   - numpy
   - pandas
   - scipy
-  - notebook
+  - seaborn
   - scikit-learn
   - statsmodels
+
+  - pip:
+      - fooof
+      - neurodsp
+      - git+https://github.com/iinnpp/isttc.git
