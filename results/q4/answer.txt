@@ -1,0 +1,29 @@
+Pairwise spike train interactions were estimated from single unit activity over the entire recording. All unordered pairs of
+units recorded from the same mouse and the same brain area were included; units were not paired across mice or across brain
+areas. This yielded 25,299 pairs from 1,449 units and 18 mice: 14,008 pairs in area 1, 7,632 in area 2, and 3,659 in area 3.
+
+Interactions were quantified with the Spike Time Tiling Coefficient (STTC).STTC was calculated with dt = 100 ms. 
+The implementation from the isttc package was used (https://github.com/iinnpp/isttc). Spike
+timestamps remained as floating-point seconds and dt was therefore specified as 0.1 s; timestamps were not converted to
+integer seconds or sample indices. The exported dataset contained an LFP-derived recording duration but not the start of
+the recording clock. For each mouse, the observation window was therefore anchored at its earliest observed spike and
+extended for the full LFP-derived recording duration. This retained all spikes, including valid negative timestamps caused
+by an offset spike clock. STTC is described in Cutts, C. S., & Eglen, S. J. (2014), 
+https://doi.org/10.1523/JNEUROSCI.2767-14.2014).
+
+STTC values were analyzed on their original scale without transformation. I fitted a linear mixed-effects model with brain
+area as a fixed effect and mouse_id as a random intercept to account for pairs recorded from the same mouse. The model
+showed an overall effect of brain area on STTC (F(2, 24854) = 109.32, p < 2.2 x 10^-16). Model-estimated mean STTC values
+were 0.0649 for area 1 (95% CI: 0.0522-0.0775), 0.0941 for area 2 (0.0814-0.1069), and 0.0870 for area 3
+(0.0739-0.1001). Those values are in the table above.
+
+Tukey-adjusted pairwise comparisons were performed and are reported as differences in mean STTC. Area 1 was 0.0292 lower
+than area 2 (area 1 - area 2: 95% CI: -0.0341 to -0.0244, p < 0.0001), and area 1 was 0.0221 lower than area 3
+(area 1 - area 3: -0.0284 to -0.0159, p < 0.0001). Area 2 was 0.0071 higher than area 3
+(area 2 - area 3: 0.0005-0.0137, p = 0.0305). Therefore, brain area 2 had the strongest pairwise spike train
+interactions at the 100-ms timescale.
+
+Code: D:\git_repos\con2phys_submission\code\questions\q4_log.r,
+D:\git_repos\con2phys_submission\code\questions\q4.ipynb
+
+Model output: D:\git_repos\con2phys_submission\results\q4\sttc_mixed_model_results.txt
