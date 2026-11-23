@@ -1,0 +1,43 @@
+Timescales were estimated based on single unit activity.
+
+Baseline activity was defined using 1-s intervals immediately preceding trial onset, separated from trial_start by a 
+50-ms period; thus, each candidate interval spanned [trial_start − 1.05 s, trial_start − 0.05 s). Candidates were excluded 
+if they overlapped the preceding trial, or could not be verified because the preceding trial_end was missing. Each mouse 
+had at least 256 valid intervals. To ensure equal signal duration across mice, 250 intervals were sampled without 
+replacement for each mouse using a fixed random seed (42), yielding 4,500 baseline intervals in total.I did not use a single 
+continuous baseline period because the longest trial-free segment varied substantially across mice and was only 9.7s for 
+one mouse.
+
+For each unit, the intrinsic neuronal timescale was estimated with the trial-concatenation iSTTC method
+(`sttc_trial_concat`) implemented in the isttc package (Pochinok, Hanganu-Opatz, & Chini, 2026). The 250 baseline
+intervals were treated as trials and combined into one iSTTC autocorrelation function per unit. Spike times were converted
+from seconds to integer sample indices at the 30-kHz sampling rate. I used a 50-ms lag step, 20 lags, a 25-ms STTC
+coincidence window, and 3-s zero-padding between concatenated trials. A single exponential was fitted to each
+autocorrelation function starting from the first time lag. The method is described in Pochinok, I., Hanganu-Opatz, I. L., 
+& Chini, M. (2026),"iSTTC: A robust method for accurate estimation of intrinsic neural timescales from single-unit recordings," PLoS
+Computational Biology, 22(3), e1013385 (https://doi.org/10.1371/journal.pcbi.1013385). Method repository:
+https://github.com/iinnpp/isttc.
+
+Only timescale estimates passed quality control were included. A timescale estimate passed quality control if the exponential 
+fit had R-squared >= 0.5, its 95% confidence interval excluded zero, the autocorrelation function declined monotonically 
+from 50 through 200 ms and the estimate was in the inclusive 50-1000 ms range. This filter left 364 units (25.1% of all units) 
+for statistical analysis: 259 units in area 1, 50 in area 2, and 55 in area 3.
+
+Because unit-level timescales were strictly positive and right-skewed, timescale was log-transformed before statistical
+analysis. I fitted a linear mixed-effects model with brain area as a fixed effect and mouse_id as a random intercept to
+account for units recorded from the same mouse. The model showed an overall effect of brain area on log timescale
+(F(2, 353.67) = 21.61, p = 1.40 x 10^-9). Back-transformed model estimates, interpreted as geometric mean timescales,
+were 183.5 ms for area 1 (95% CI: 165.7-203.2), 271.7 ms for area 2 (228.4-323.3), and 130.3 ms for area 3
+(110.3-154.1). Those values are in the table above.
+
+Tukey-adjusted pairwise comparisons were performed on the log scale and are reported as ratios of geometric means.
+Area 1 was 0.68 times area 2 (95% CI: 0.55-0.83, p < 0.0001), area 1 was 1.41 times area 3
+(1.15-1.72, p = 0.0003), and area 2 was 2.08 times area 3 (1.60-2.72, p < 0.0001). Therefore, brain area 3 had the
+shortest intrinsic neuronal timescale during baseline activity.
+
+The same result was obtained with using trial-averaged Pearsonr (as in Murray et al, 2014). 
+
+Code: D:\git_repos\con2phys_submission\code\questions\q10_log.r,
+D:\git_repos\con2phys_submission\code\questions\q10.ipynb
+
+Model output: D:\git_repos\con2phys_submission\results\q10\sttc_concat_tau_log_mixed_model_results.txt

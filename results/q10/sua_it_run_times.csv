@@ -1,0 +1,2 @@
+started_at,finished_at,wall_time_seconds,new_units_processed,total_units_in_results,result_rows,max_units_setting,pearsonr_trial_avg_seconds,sttc_trial_avg_seconds,sttc_trial_concat_seconds
+2026-11-23T12:21:25,2026-11-23T13:01:12,2387.600445,1449,1449,4347,,323.8740261999719,1645.821411500021,378.48072750005485

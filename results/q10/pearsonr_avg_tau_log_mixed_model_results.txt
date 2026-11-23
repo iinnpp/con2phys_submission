@@ -1,0 +1,71 @@
+Input: D:/git_repos/con2phys_submission/results/q10/sua_it_methods.csv 
+Method: sttc_trial_concat
+Selection: qc_pass and inclusive 50--1000 ms range
+Selected units: 314 
+Selected mice: 18 
+
+Units per brain area
+
+  1   2   3 
+225  43  46 
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: log(tau_ms) ~ brain_area + (1 | mouse_id)
+   Data: tau
+
+REML criterion at convergence: 590.9
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.05776 -0.71200 -0.08516  0.56406  2.74330 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ mouse_id (Intercept) 0.02819  0.1679  
+ Residual             0.35935  0.5995  
+Number of obs: 314, groups:  mouse_id, 18
+
+Fixed effects:
+             Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)   5.18363    0.05878  19.49483  88.189  < 2e-16 ***
+brain_area2   0.30875    0.10581 299.87908   2.918  0.00379 ** 
+brain_area3  -0.25632    0.10221 306.80808  -2.508  0.01266 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) brn_r2
+brain_area2 -0.307       
+brain_area3 -0.312  0.199
+
+Overall effect of brain area on log timescale
+Type III Analysis of Variance Table with Satterthwaite's method
+           Sum Sq Mean Sq NumDF  DenDF F value    Pr(>F)    
+brain_area 6.6261   3.313     2 302.07  9.2195 0.0001299 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Back-transformed geometric means and 95% confidence intervals
+ brain_area response       SE     df lower.CL upper.CL
+ 1          178.3296 10.56842  20.86 157.6440 201.7296
+ 2          242.8352 25.48172 120.26 197.2802 298.9095
+ 3          138.0090 14.00363 118.79 112.8880 168.7201
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+Intervals are back-transformed from the log scale 
+
+Tukey-adjusted pairwise ratios
+ contrast                     ratio         SE     df  lower.CL  upper.CL null t.ratio p.value
+ brain_area1 / brain_area2 0.734365 0.07856388 300.63 0.5707907 0.9448156    1  -2.886  0.0116
+ brain_area1 / brain_area3 1.292160 0.13332015 307.10 1.0134105 1.6475824    1   2.484  0.0359
+ brain_area2 / brain_area3 1.759561 0.23328775 310.68 1.2876658 2.4043927    1   4.262  0.0001
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+Intervals are back-transformed from the log scale 
+P value adjustment: tukey method for comparing a family of 3 estimates 
+Tests are performed on the log scale 
+
+Saved plot to D:/git_repos/con2phys_submission/results/q10/pearsonr_avg_tau_log_mixed_model_geometric_mean_and_95_ci.png 
+Saved contrast plot to D:/git_repos/con2phys_submission/results/q10/pearsonr_avg_tau_log_mixed_model_pairwise_ratios.png 
