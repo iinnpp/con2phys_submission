@@ -1,0 +1,4 @@
+"contrast","estimate","SE","df","lower.CL","upper.CL","t.ratio","p.value","significance","contrast_label"
+"trial_start_to_stim - stim_to_outcome",-0.116347358138152,0.0129083813450957,34.0000001124547,-0.147978515399897,-0.0847162008764067,-9.01331894586117,4.63657445770593e-10,"***","Trial start to stimulus - Stimulus to outcome"
+"trial_start_to_stim - outcome_to_trial_end",-0.0957234573349967,0.0129083813450957,34.0000001105308,-0.127354614596823,-0.0640923000731709,-7.41560500700307,3.9755575387268e-08,"***","Trial start to stimulus - Outcome to trial end"
+"stim_to_outcome - outcome_to_trial_end",0.0206239008031554,0.0129083813450957,34.0000001152192,-0.0110072564584735,0.0522550580647842,1.59771393885811,0.260406752097508,"ns","Stimulus to outcome - Outcome to trial end"

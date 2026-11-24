@@ -1,0 +1,130 @@
+Q11 whole-trial decoding statistics
+===================================
+
+Input: D:/git_repos/con2phys_submission/results/q11/whole_trial/whole_trial_auc_mouse_area.csv 
+Response: mean cross-validated ROC-AUC across 20 neuron subsamples
+Independent unit: mouse
+Mice: 18 
+Brain areas: 1, 2, 3
+
+Above-chance analysis
+---------------------
+Exact one-sided sign-flip tests of mouse mean ROC-AUC against 0.5.
+Tukey adjustment does not apply to tests against a fixed benchmark;
+these planned area-specific tests are reported separately.
+
+  brain_area n_mice mean_roc_auc sd_mouse_auc mean_above_chance median_roc_auc
+1          1     18    0.7218761    0.1077638         0.2218761      0.7060993
+2          2     18    0.7294118    0.1158995         0.2294118      0.6936138
+3          3     18    0.7572469    0.1079126         0.2572469      0.7489748
+  n_mice_above_chance chance_auc        alternative n_sign_patterns
+1                  18        0.5 mean ROC-AUC > 0.5          262144
+2                  18        0.5 mean ROC-AUC > 0.5          262144
+3                  18        0.5 mean ROC-AUC > 0.5          262144
+       p_value significance
+1 3.814697e-06          ***
+2 3.814697e-06          ***
+3 3.814697e-06          ***
+
+Repeated-measures mixed model
+-----------------------------
+Model: mean_roc_auc ~ brain_area + (1 | mouse_id)
+Degrees of freedom: Satterthwaite
+
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: mean_roc_auc ~ brain_area + (1 | mouse_id)
+   Data: auc
+
+REML criterion at convergence: -99.1
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-1.60677 -0.57338 -0.06267  0.48211  2.57413 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ mouse_id (Intercept) 0.008779 0.09370 
+ Residual             0.003451 0.05874 
+Number of obs: 54, groups:  mouse_id, 18
+
+Fixed effects:
+             Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)  0.721876   0.026066 25.115777  27.694   <2e-16 ***
+brain_area2  0.007536   0.019581 34.000000   0.385   0.7028    
+brain_area3  0.035371   0.019581 34.000000   1.806   0.0797 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) brn_r2
+brain_area2 -0.376       
+brain_area3 -0.376  0.500
+
+Overall effect of brain area
+        term     Sum Sq     Mean Sq NumDF DenDF  F value    Pr(>F)
+1 brain_area 0.01249598 0.006247991     2    34 1.810557 0.1789795
+
+Model-estimated area means and 95% confidence intervals
+ brain_area    emmean         SE    df  lower.CL  upper.CL
+ 1          0.7218761 0.02606646 25.12 0.6682038 0.7755485
+ 2          0.7294118 0.02606646 25.12 0.6757395 0.7830842
+ 3          0.7572469 0.02606646 25.12 0.7035745 0.8109192
+
+Degrees-of-freedom method: satterthwaite 
+Confidence level used: 0.95 
+
+Tukey-adjusted pairwise area comparisons
+ contrast                     estimate         SE df    lower.CL   upper.CL
+ brain_area1 - brain_area2 -0.00753570 0.01958136 34 -0.05551855 0.04044715
+ brain_area1 - brain_area3 -0.03537073 0.01958136 34 -0.08335358 0.01261213
+ brain_area2 - brain_area3 -0.02783503 0.01958136 34 -0.07581788 0.02014783
+ t.ratio p.value significance    label_x
+  -0.385  0.9218 ns           0.04544715
+  -1.806  0.1827 ns           0.01761213
+  -1.422  0.3414 ns           0.02514783
+
+Degrees-of-freedom method: satterthwaite 
+Confidence level used: 0.95 
+Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+P value adjustment: tukey method for comparing a family of 3 estimates 
+
+Saved statistical plots
+Area means: D:/git_repos/con2phys_submission/results/q11/whole_trial/whole_trial_stats_area_means_95ci.png 
+Pairwise comparisons: D:/git_repos/con2phys_submission/results/q11/whole_trial/whole_trial_stats_pairwise_tukey.png 
+
+Session information
+R version 4.5.0 (2025-04-11 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] C
+system code page: 65001
+
+time zone: Europe/Berlin
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_3.5.2  emmeans_1.11.0 lmerTest_3.1-3 lme4_1.1-37    Matrix_1.7-3  
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.6        dplyr_1.1.4         compiler_4.5.0     
+ [4] tidyselect_1.2.1    Rcpp_1.0.14         splines_4.5.0      
+ [7] scales_1.3.0        boot_1.3-31         lattice_0.22-6     
+[10] coda_0.19-4.1       R6_2.6.1            labeling_0.4.3     
+[13] generics_0.1.3      rbibutils_2.3       MASS_7.3-65        
+[16] tibble_3.2.1        nloptr_2.2.1        munsell_0.5.1      
+[19] minqa_1.2.8         pillar_1.10.2       rlang_1.1.6        
+[22] estimability_1.5.1  cli_3.6.4           withr_3.0.2        
+[25] magrittr_2.0.3      Rdpack_2.6.4        grid_4.5.0         
+[28] mvtnorm_1.3-3       xtable_1.8-4        lifecycle_1.0.4    
+[31] nlme_3.1-168        reformulas_0.4.0    vctrs_0.6.5        
+[34] glue_1.8.0          farver_2.1.2        numDeriv_2016.8-1.1
+[37] colorspace_2.1-1    tools_4.5.0         pkgconfig_2.0.3    

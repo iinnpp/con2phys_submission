@@ -1,0 +1,21 @@
+{
+  "signal": "single-unit population spike raster",
+  "spike_window": "[stim_start, trial_end) using complete bins only",
+  "trial_filtering": "reuse results/q11/trials_info_filtered.csv from Q11-Q13",
+  "primary_metric": "observed DEFLATE compressed bytes / mean rate-matched surrogate compressed bytes",
+  "interpretation": "rate-normalized Lempel-Ziv population raster incompressibility",
+  "raster_serialization": "time-major binary sequence; random unit order per subsample",
+  "surrogate": "independent temporal redistribution preserving each selected unit's total binned spike count",
+  "neuron_matching": "minimum area population within mouse",
+  "bin_widths_ms": [
+    10,
+    20,
+    50
+  ],
+  "primary_bin_width_ms": 20,
+  "n_neuron_subsamples": 20,
+  "n_rate_surrogates_per_subsample": 1,
+  "compression": "zlib DEFLATE level 1",
+  "random_seed": 42,
+  "max_mice": null
+}

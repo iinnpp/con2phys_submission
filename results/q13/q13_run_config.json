@@ -1,0 +1,15 @@
+{
+  "feature": "trial_level_mean_firing_rate_stim_start_to_outcome",
+  "spike_window": "[stim_start, outcome)",
+  "trial_filtering": "reuse results/q11/trials_info_filtered.csv from Q11/Q12",
+  "neuron_standardization": "z_score_across_trials_ddof_1; zero_variance_neurons_set_to_zero",
+  "primary_metric": "pca_participation_ratio",
+  "sensitivity_metrics": [
+    "participation_ratio_per_sampled_neuron",
+    "n_components_90pct"
+  ],
+  "neuron_matching": "minimum_area_population_within_mouse",
+  "n_neuron_subsamples": 100,
+  "random_seed": 42,
+  "max_mice": null
+}

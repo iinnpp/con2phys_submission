@@ -1,0 +1,57 @@
+Variable A was decoded from single-unit spiking activity during trials. Trial selection was based on the event timestamps in
+the trial-information table. A trial was retained only if trial_start, stim_start, outcome, and trial_end were all present and
+strictly ordered as trial_start < stim_start < outcome < trial_end. The final recorded trial for each mouse, defined as the
+trial with the maximum trial_id, was excluded. The source table contained 10,373 trials from 18 mice. The completeness and
+event-order criteria retained 10,361 trials; seven final trials had already failed those criteria, and excluding the remaining
+11 final trials produced a dataset of 10,350 trials. 
+
+Because variable A is binary, information about A was quantified as the cross-validated ROC-AUC of a population decoder.
+For each retained trial, the feature for each neuron was its mean firing rate within the analyzed trial interval. Decoding
+was performed separately for each mouse and brain area using an L2-regularized logistic regression. Features were
+standardized within each training fold, and class weights were balanced to account for unequal numbers of A = 0 and A = 1
+trials. Five-fold stratified cross-validation was performed within each mouse, using the same trial folds for all three brain
+areas. To prevent an area with more recorded units from receiving an advantage, the three areas were matched within each
+mouse to the smallest recorded area population. Units were randomly subsampled 20 times, and ROC-AUC was averaged across
+the neuron subsamples. Mouse-level mean ROC-AUC was used as the independent observation for area-level summaries and
+statistical analysis.
+
+The decoder was first applied to the entire trial, from trial_start to trial_end. Mean ROC-AUC values were 0.722 for area 1
+(95% CI: 0.672-0.772), 0.729 for area 2 (0.676-0.783), and 0.757 for area 3 (0.707-0.807), showing that variable A
+could be decoded from whole-trial spiking activity. To determine when this information was most prominent, population
+firing-rate time courses were then plotted separately for A = 0 and A = 1 trials. Trials were piecewise normalized into
+20 equal bins for trial_start-to-stimulus,
+stimulus-to-outcome, and outcome-to-trial_end, thereby aligning stimulus and outcome despite differences in trial duration.
+The largest descriptive separation between A = 0 and A = 1 occurred after the outcome.
+
+The same decoder analysis was subsequently repeated separately for all three trial portions. Mean ROC-AUC values for
+trial_start-to-stimulus were 0.507 for area 1 (95% CI: 0.493-0.521), 0.528 for area 2 (0.509-0.547), and 0.501 for
+area 3 (0.479-0.524). For stimulus-to-outcome they were 0.576 for area 1 (0.546-0.605), 0.594 for area 2
+(0.562-0.626), and 0.607 for area 3 (0.573-0.641). For outcome-to-trial_end they were 0.818 for area 1
+(0.773-0.863), 0.812 for area 2 (0.760-0.864), and 0.866 for area 3 (0.830-0.902). These descriptive 95% confidence
+intervals were calculated across the 18 mouse-level mean ROC-AUC values. Thus, information about variable A was weak before
+the stimulus, increased between stimulus and outcome, and was strongest after the outcome.
+
+For the outcome-to-trial_end interval, above-chance decoding was tested using exact one-sided mouse-level sign-flip tests.
+All 18 mice had a mean ROC-AUC greater than 0.5 in every brain area. Decoding was above chance in area 1 (mean ROC-AUC
+0.818, p = 3.81 x 10^-6), area 2 (0.812, p = 3.81 x 10^-6), and area 3 (0.866, p = 3.81 x 10^-6).
+
+Differences among brain areas were tested with a linear mixed-effects model using brain area as a fixed effect and mouse_id
+as a random intercept. The model showed an overall effect of brain area on outcome-to-trial_end ROC-AUC
+(F(2, 34) = 3.60, p = 0.0381). Model-estimated mean ROC-AUC values were 0.818 for area 1
+(95% CI: 0.771-0.864), 0.812 for area 2 (0.765-0.859), and 0.866 for area 3 (0.819-0.913).
+
+Tukey-adjusted pairwise comparisons did not show a significant difference between any two areas. The area 1 - area 2
+difference was 0.0058 (95% CI: -0.0484 to 0.0599, p = 0.9632), the area 1 - area 3 difference was -0.0482
+(-0.1023 to 0.0059, p = 0.0887), and the area 2 - area 3 difference was -0.0540
+(-0.1081 to 0.0002, p = 0.0508). Therefore, variable A was strongly represented in post-outcome spiking activity in all
+three areas. Area 3 had the highest descriptive decoding accuracy, but it was not significantly better than areas 1 or 2
+after Tukey correction.
+
+Code: D:\git_repos\con2phys_submission\code\questions\q11.ipynb,
+D:\git_repos\con2phys_submission\code\questions\q11_plots.ipynb,
+D:\git_repos\con2phys_submission\code\questions\q11_trial_start_stim.ipynb,
+D:\git_repos\con2phys_submission\code\questions\q11_stim_outcome.ipynb,
+D:\git_repos\con2phys_submission\code\questions\q11_outcome_trial_end.ipynb,
+D:\git_repos\con2phys_submission\code\questions\q11_outcome_trial_end_stats.R
+
+Model output: D:\git_repos\con2phys_submission\results\q11\outcome_trial_end\outcome_trial_end_stats_results.txt

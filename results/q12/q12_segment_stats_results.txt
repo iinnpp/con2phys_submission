@@ -1,0 +1,122 @@
+Q12 trial-segment decoding statistics
+=====================================
+
+Input: D:/git_repos/con2phys_submission/results/q12/q12_auc_mouse_segment.csv 
+Response: mean cross-validated ROC-AUC across brain areas
+Independent unit: mouse
+Mice: 18 
+Segments: trial_start_to_stim, stim_to_outcome, outcome_to_trial_end 
+
+Repeated-measures mixed model
+-----------------------------
+Model: mean_roc_auc ~ segment + (1 | mouse_id)
+Degrees of freedom: Satterthwaite
+
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: mean_roc_auc ~ segment + (1 | mouse_id)
+   Data: auc
+
+REML criterion at convergence: -158.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-1.47685 -0.49689  0.01754  0.39444  2.85678 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ mouse_id (Intercept) 0.001122 0.03350 
+ Residual             0.001500 0.03873 
+Number of obs: 54, groups:  mouse_id, 18
+
+Fixed effects:
+                            Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)                  0.55401    0.01207 37.32289  45.903  < 2e-16 ***
+segmentstim_to_outcome       0.11635    0.01291 34.00000   9.013 1.56e-10 ***
+segmentoutcome_to_trial_end  0.09572    0.01291 34.00000   7.416 1.34e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) sgmn__
+sgmntstm_t_ -0.535       
+sgmnttcm___ -0.535  0.500
+
+Overall effect of trial segment
+     term    Sum Sq   Mean Sq NumDF DenDF  F value      Pr(>F)
+1 segment 0.1387502 0.0693751     2    34 46.26127 1.98741e-10
+
+Model-estimated segment means and 95% confidence intervals
+ segment                 emmean         SE    df  lower.CL  upper.CL
+ trial_start_to_stim  0.5540116 0.01206918 37.32 0.5295642 0.5784589
+ stim_to_outcome      0.6703589 0.01206918 37.32 0.6459116 0.6948063
+ outcome_to_trial_end 0.6497350 0.01206918 37.32 0.6252877 0.6741824
+ segment_label          
+ Trial start to stimulus
+ Stimulus to outcome    
+ Outcome to trial end   
+
+Degrees-of-freedom method: satterthwaite 
+Confidence level used: 0.95 
+
+Tukey-adjusted pairwise segment comparisons
+ contrast                                      estimate         SE df
+ trial_start_to_stim - stim_to_outcome      -0.11634736 0.01290838 34
+ trial_start_to_stim - outcome_to_trial_end -0.09572346 0.01290838 34
+ stim_to_outcome - outcome_to_trial_end      0.02062390 0.01290838 34
+    lower.CL    upper.CL t.ratio p.value significance
+ -0.14797852 -0.08471620  -9.013 <0.0001 ***         
+ -0.12735461 -0.06409230  -7.416 <0.0001 ***         
+ -0.01100726  0.05225506   1.598  0.2604 ns          
+ contrast_label                                     label_x
+ Trial start to stimulus - Stimulus to outcome  -0.07670686
+ Trial start to stimulus - Outcome to trial end -0.05608296
+ Stimulus to outcome - Outcome to trial end      0.06026440
+
+Degrees-of-freedom method: satterthwaite 
+Confidence level used: 0.95 
+Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+P value adjustment: tukey method for comparing a family of 3 estimates 
+
+Saved statistical plots
+Segment means: D:/git_repos/con2phys_submission/results/q12/q12_segment_stats_means_95ci.png 
+Pairwise comparisons: D:/git_repos/con2phys_submission/results/q12/q12_segment_stats_pairwise_tukey.png 
+
+Session information
+R version 4.5.0 (2025-04-11 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] C
+system code page: 65001
+
+time zone: Europe/Berlin
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_4.0.4  emmeans_2.0.5  lmerTest_3.2-1 lme4_1.1-37    Matrix_1.7-3  
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.6        dplyr_1.1.4         compiler_4.5.0     
+ [4] tidyselect_1.2.1    Rcpp_1.0.14         textshaping_1.0.5  
+ [7] systemfonts_1.3.2   splines_4.5.0       scales_1.4.0       
+[10] boot_1.3-31         TH.data_1.1-5       coda_0.19-4.1      
+[13] lattice_0.22-6      R6_2.6.1            labeling_0.4.3     
+[16] generics_0.1.3      rbibutils_2.3       MASS_7.3-65        
+[19] tibble_3.2.1        nloptr_2.2.1        minqa_1.2.8        
+[22] pillar_1.10.2       RColorBrewer_1.1-3  rlang_1.3.0        
+[25] multcomp_1.4-32     S7_1.0.0            estimability_1.5.1 
+[28] cli_3.6.6           withr_3.0.2         magrittr_2.0.3     
+[31] Rdpack_2.6.4        grid_4.5.0          xtable_1.8-4       
+[34] mvtnorm_1.3-3       sandwich_3.1-1      lifecycle_1.0.4    
+[37] nlme_3.1-168        reformulas_0.4.0    vctrs_0.6.5        
+[40] glue_1.8.0          farver_2.1.2        numDeriv_2016.8-1.1
+[43] ragg_1.5.2          codetools_0.2-20    zoo_1.8-14         
+[46] survival_3.8-3      tools_4.5.0         pkgconfig_2.0.3    

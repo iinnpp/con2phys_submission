@@ -1,0 +1,2 @@
+Q15 answer: Not enough data / no differences
+Decision rule result: Brain area 1 has the largest model-estimated normalized Lempel-Ziv complexity, but is not greater than both other areas in Tukey-adjusted comparisons (p < 0.05).

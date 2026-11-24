@@ -1,0 +1,52 @@
+Variable C was examined using single-unit spiking activity during trials. Trial selection was based on the event timestamps in
+the trial-information table and used the same criteria as Q11. A trial was retained only if trial_start, stim_start, outcome,
+and trial_end were all present and strictly ordered as trial_start < stim_start < outcome < trial_end. The final recorded trial
+for each mouse, defined as the trial with the maximum trial_id, was excluded. The source table contained 10,373 trials from
+18 mice. The completeness and event-order criteria retained 10,361 trials; seven final trials had already failed those
+criteria, and excluding the remaining 11 final trials produced a dataset of 10,350 trials.
+
+Variable C was recorded as 0, 1, or 2. The filtered dataset contained 5,028 C = 0 trials, 29 C = 1 trials, and 5,293 C = 2
+trials. C = 1 occurred in only five mice and could not support a consistent five-fold within-mouse decoder. The primary
+decoding analysis therefore compared C = 0 with C = 2 in all 18 mice. C = 1 trials were retained in the filtered trial table
+and in the descriptive firing-rate plots but were explicitly excluded from the decoder.
+
+Population firing-rate time courses were first plotted separately for the observed values of variable C. Trials were
+piecewise normalized into 20 equal bins for trial_start-to-stimulus, stimulus-to-outcome, and outcome-to-trial_end. This
+aligned stimulus and outcome across trials with different durations while retaining firing rates in Hz by using each bin's
+physical duration. The largest descriptive separation between C = 0 and C = 2 was generally observed between stimulus and
+outcome, although C = 1 trajectories were too sparse for reliable interpretation in most mice.
+
+Information about C = 0 versus C = 2 was quantified as cross-validated ROC-AUC. For each retained decoding trial, the
+feature for each neuron was its mean firing rate within the analyzed trial segment. Decoding was performed separately for
+each mouse and brain area using an L2-regularized logistic regression. Features were standardized within each training fold,
+and class weights were balanced. Five-fold stratified cross-validation was performed within each mouse. The same trial
+folds were used for all three brain areas and all three trial segments. To prevent areas with more recorded units from
+receiving an advantage, the three areas were matched within each mouse to the smallest recorded area population. Units were
+randomly subsampled 20 times. Within each mouse, area, and subsample, the same selected units were used for all three trial
+segments. ROC-AUC was averaged across neuron subsamples, then across the three brain areas within each mouse. The 18
+mouse-level means were the independent observations for the trial-segment comparison.
+
+Model-estimated mean ROC-AUC was 0.554 for trial_start-to-stimulus (95% CI: 0.530-0.578), 0.670 for
+stimulus-to-outcome (0.646-0.695), and 0.650 for outcome-to-trial_end (0.625-0.674). Those values are given in the 
+table above. Differences among segments were tested
+with a linear mixed-effects model using trial segment as a fixed effect and mouse_id as a random intercept. The model showed
+a strong overall effect of trial segment on ROC-AUC (F(2, 34) = 46.26, p = 1.99 x 10^-10).
+
+Tukey-adjusted pairwise comparisons showed that decoding was higher during stimulus-to-outcome than during
+trial_start-to-stimulus. The trial_start-to-stimulus minus stimulus-to-outcome difference was -0.1163 (95% CI: -0.1480 to
+-0.0847, p = 4.64 x 10^-10). Decoding was also higher during outcome-to-trial_end than during trial_start-to-stimulus. The
+trial_start-to-stimulus minus outcome-to-trial_end difference was -0.0957 (-0.1274 to -0.0641, p = 3.98 x 10^-8).
+Stimulus-to-outcome had the highest descriptive mean, but it was not significantly different from outcome-to-trial_end after
+Tukey correction: the stimulus-to-outcome minus outcome-to-trial_end difference was 0.0206 (-0.0110 to 0.0523,
+p = 0.2604).
+
+Thus, variable C = 0 versus C = 2 was decoded poorly before the stimulus and substantially better during both later trial
+segments. Stimulus-to-outcome had the highest mean decoding accuracy and is the descriptive answer to Q12, but the data do
+not show that it is statistically better than outcome-to-trial_end after Tukey correction. The inference applies to the
+C = 0 versus C = 2 contrast and does not establish three-class decoding of C because C = 1 was too rare.
+
+Code: D:\git_repos\con2phys_submission\code\questions\q12.ipynb,
+D:\git_repos\con2phys_submission\code\questions\q12_plots.ipynb,
+D:\git_repos\con2phys_submission\code\questions\q12_segment_stats.R
+
+Model output: D:\git_repos\con2phys_submission\results\q12\q12_segment_stats_results.txt

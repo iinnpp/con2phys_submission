@@ -1,0 +1,254 @@
+Q15 stimulus-to-trial-end population spiking complexity statistics
+==================================================================
+
+Input: D:/git_repos/con2phys_submission/results/q15/subsamples100/q15_lzc_mouse_area_bin.csv 
+Primary response: mean rate-normalized Lempel-Ziv compression complexity
+Definition: observed DEFLATE compressed bytes divided by mean rate-matched surrogate compressed bytes
+Primary bin width: 20 ms
+Independent unit: mouse
+Mice: 18 
+Brain areas: 1, 2, 3 
+Neuron matching: minimum area population separately within each mouse
+Neuron subsamples per mouse-area: 100 
+Rate-matched surrogates per neuron subsample: 1 (20 independently seeded surrogates per mouse-area-bin mean)
+
+Primary repeated-measures mixed model
+-------------------------------------
+Model: mean_normalized_lz_complexity ~ brain_area + (1 | mouse_id)
+Degrees of freedom: Satterthwaite
+
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: mean_normalized_lz_complexity ~ brain_area + (1 | mouse_id)
+   Data: primary
+
+REML criterion at convergence: -184
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.8147 -0.2462  0.2536  0.5111  1.0924 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ mouse_id (Intercept) 0.000189 0.01375 
+ Residual             0.001173 0.03425 
+Number of obs: 54, groups:  mouse_id, 18
+
+Fixed effects:
+            Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)  0.97612    0.00870 49.10912 112.199  < 2e-16 ***
+brain_area2 -0.03302    0.01142 34.00000  -2.892  0.00663 ** 
+brain_area3 -0.02550    0.01142 34.00000  -2.233  0.03225 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) brn_r2
+brain_area2 -0.656       
+brain_area3 -0.656  0.500
+
+Overall effect of brain area
+        term     Sum Sq    Mean Sq NumDF DenDF  F value   Pr(>F)
+1 brain_area 0.01078136 0.00539068     2    34 4.594248 0.017135
+
+Model-estimated area means and 95% confidence intervals
+ brain_area    emmean          SE    df  lower.CL  upper.CL brain_area_label
+ 1          0.9761185 0.008699894 49.11 0.9586364 0.9936007 Brain area 1    
+ 2          0.9430994 0.008699894 49.11 0.9256173 0.9605815 Brain area 2    
+ 3          0.9506230 0.008699894 49.11 0.9331409 0.9681051 Brain area 3    
+
+Degrees-of-freedom method: satterthwaite 
+Confidence level used: 0.95 
+
+Tukey-adjusted pairwise brain-area comparisons
+ contrast                     estimate         SE df    lower.CL   upper.CL
+ brain_area1 - brain_area2  0.03301915 0.01141809 34  0.00503987 0.06099844
+ brain_area1 - brain_area3  0.02549558 0.01141809 34 -0.00248370 0.05347487
+ brain_area2 - brain_area3 -0.00752357 0.01141809 34 -0.03550285 0.02045572
+ t.ratio p.value significance contrast_area_1 contrast_area_2
+   2.892  0.0178 *            1               2              
+   2.233  0.0799 ns           1               3              
+  -0.659  0.7886 ns           2               3              
+ contrast_label                 label_x
+ Brain area 1 - Brain area 2 0.06485849
+ Brain area 1 - Brain area 3 0.05733492
+ Brain area 2 - Brain area 3 0.02431577
+
+Degrees-of-freedom method: satterthwaite 
+Confidence level used: 0.95 
+Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+P value adjustment: tukey method for comparing a family of 3 estimates 
+
+Bin-width sensitivity model
+---------------------------
+Model: mean_normalized_lz_complexity ~ brain_area * bin_width_factor + (1 | mouse_id)
+
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: mean_normalized_lz_complexity ~ brain_area * bin_width_factor +  
+    (1 | mouse_id)
+   Data: complexity
+
+REML criterion at convergence: -584.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.7993 -0.3546  0.1043  0.5851  2.0818 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev.
+ mouse_id (Intercept) 0.0004768 0.02184 
+ Residual             0.0008903 0.02984 
+Number of obs: 162, groups:  mouse_id, 18
+
+Fixed effects:
+                                    Estimate Std. Error         df t value
+(Intercept)                         0.971928   0.008715  77.543782 111.523
+brain_area2                        -0.026635   0.009946 136.000000  -2.678
+brain_area3                        -0.027033   0.009946 136.000000  -2.718
+bin_width_factor20 ms               0.004191   0.009946 136.000000   0.421
+bin_width_factor50 ms               0.009943   0.009946 136.000000   1.000
+brain_area2:bin_width_factor20 ms  -0.006384   0.014066 136.000000  -0.454
+brain_area3:bin_width_factor20 ms   0.001537   0.014066 136.000000   0.109
+brain_area2:bin_width_factor50 ms  -0.019630   0.014066 136.000000  -1.396
+brain_area3:bin_width_factor50 ms   0.001868   0.014066 136.000000   0.133
+                                  Pr(>|t|)    
+(Intercept)                        < 2e-16 ***
+brain_area2                        0.00832 ** 
+brain_area3                        0.00743 ** 
+bin_width_factor20 ms              0.67417    
+bin_width_factor50 ms              0.31921    
+brain_area2:bin_width_factor20 ms  0.65064    
+brain_area3:bin_width_factor20 ms  0.91314    
+brain_area2:bin_width_factor50 ms  0.16511    
+brain_area3:bin_width_factor50 ms  0.89453    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) brn_r2 brn_r3 b__20m b__50m b_2:__2m b_3:__2m b_2:__5m
+brain_area2 -0.571                                                       
+brain_area3 -0.571  0.500                                                
+bn_wdth_20m -0.571  0.500  0.500                                         
+bn_wdth_50m -0.571  0.500  0.500  0.500                                  
+brn_2:__20m  0.403 -0.707 -0.354 -0.707 -0.354                           
+brn_3:__20m  0.403 -0.354 -0.707 -0.707 -0.354  0.500                    
+brn_2:__50m  0.403 -0.707 -0.354 -0.354 -0.707  0.500    0.250           
+brn_3:__50m  0.403 -0.354 -0.707 -0.354 -0.707  0.250    0.500    0.500  
+
+Sensitivity-model effects
+                         term       Sum Sq      Mean Sq NumDF DenDF    F value
+1                  brain_area 0.0361036369 0.0180518184     2   136 20.2754196
+2            bin_width_factor 0.0004483681 0.0002241841     2   136  0.2517988
+3 brain_area:bin_width_factor 0.0026336644 0.0006584161     4   136  0.7395190
+        Pr(>F)
+1 1.965623e-08
+2 7.777628e-01
+3 5.666045e-01
+
+Area means by bin width
+bin_width_factor = 10 ms:
+ brain_area    emmean         SE    df  lower.CL  upper.CL brain_area_label
+ 1          0.9719279 0.00871504 77.54 0.9545759 0.9892798 Brain area 1    
+ 2          0.9452930 0.00871504 77.54 0.9279410 0.9626449 Brain area 2    
+ 3          0.9448952 0.00871504 77.54 0.9275433 0.9622471 Brain area 3    
+
+bin_width_factor = 20 ms:
+ brain_area    emmean         SE    df  lower.CL  upper.CL brain_area_label
+ 1          0.9761185 0.00871504 77.54 0.9587666 0.9934705 Brain area 1    
+ 2          0.9430994 0.00871504 77.54 0.9257475 0.9604513 Brain area 2    
+ 3          0.9506230 0.00871504 77.54 0.9332710 0.9679749 Brain area 3    
+
+bin_width_factor = 50 ms:
+ brain_area    emmean         SE    df  lower.CL  upper.CL brain_area_label
+ 1          0.9818713 0.00871504 77.54 0.9645194 0.9992233 Brain area 1    
+ 2          0.9356060 0.00871504 77.54 0.9182541 0.9529579 Brain area 2    
+ 3          0.9567070 0.00871504 77.54 0.9393551 0.9740589 Brain area 3    
+
+Degrees-of-freedom method: satterthwaite 
+Confidence level used: 0.95 
+
+Tukey-adjusted area comparisons within bin width
+bin_width_factor = 10 ms:
+ contrast                     estimate          SE  df    lower.CL   upper.CL
+ brain_area1 - brain_area2  0.02663490 0.009946134 136  0.00306603 0.05020378
+ brain_area1 - brain_area3  0.02703268 0.009946134 136  0.00346380 0.05060155
+ brain_area2 - brain_area3  0.00039777 0.009946134 136 -0.02317110 0.02396665
+ t.ratio p.value significance
+   2.678  0.0225 *           
+   2.718  0.0202 *           
+   0.040  0.9991 ns          
+
+bin_width_factor = 20 ms:
+ contrast                     estimate          SE  df    lower.CL   upper.CL
+ brain_area1 - brain_area2  0.03301915 0.009946134 136  0.00945028 0.05658803
+ brain_area1 - brain_area3  0.02549558 0.009946134 136  0.00192671 0.04906446
+ brain_area2 - brain_area3 -0.00752357 0.009946134 136 -0.03109244 0.01604531
+ t.ratio p.value significance
+   3.320  0.0033 **          
+   2.563  0.0306 *           
+  -0.756  0.7303 ns          
+
+bin_width_factor = 50 ms:
+ contrast                     estimate          SE  df    lower.CL   upper.CL
+ brain_area1 - brain_area2  0.04626537 0.009946134 136  0.02269650 0.06983424
+ brain_area1 - brain_area3  0.02516435 0.009946134 136  0.00159548 0.04873323
+ brain_area2 - brain_area3 -0.02110102 0.009946134 136 -0.04466989 0.00246786
+ t.ratio p.value significance
+   4.652 <0.0001 ***         
+   2.530  0.0334 *           
+  -2.122  0.0893 ns          
+
+Degrees-of-freedom method: satterthwaite 
+Confidence level used: 0.95 
+Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+P value adjustment: tukey method for comparing a family of 3 estimates 
+
+Multiple-choice decision
+------------------------
+Answer: Not enough data / no differences 
+Brain area 1 has the largest model-estimated normalized Lempel-Ziv complexity, but is not greater than both other areas in Tukey-adjusted comparisons (p < 0.05). 
+
+Saved statistical plots
+Primary area means: D:/git_repos/con2phys_submission/results/q15/subsamples100/q15_complexity_stats_means_95ci.png 
+Primary pairwise comparisons: D:/git_repos/con2phys_submission/results/q15/subsamples100/q15_complexity_stats_pairwise_tukey.png 
+Bin-width sensitivity: D:/git_repos/con2phys_submission/results/q15/subsamples100/q15_complexity_bin_width_sensitivity.png 
+
+Session information
+R version 4.5.0 (2025-04-11 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] C
+system code page: 65001
+
+time zone: Europe/Berlin
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggplot2_4.0.4  emmeans_2.0.5  lmerTest_3.2-1 lme4_1.1-37    Matrix_1.7-3  
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.6        dplyr_1.1.4         compiler_4.5.0     
+ [4] tidyselect_1.2.1    Rcpp_1.0.14         textshaping_1.0.5  
+ [7] systemfonts_1.3.2   splines_4.5.0       scales_1.4.0       
+[10] boot_1.3-31         TH.data_1.1-5       coda_0.19-4.1      
+[13] lattice_0.22-6      R6_2.6.1            labeling_0.4.3     
+[16] generics_0.1.3      rbibutils_2.3       MASS_7.3-65        
+[19] tibble_3.2.1        nloptr_2.2.1        minqa_1.2.8        
+[22] pillar_1.10.2       RColorBrewer_1.1-3  rlang_1.3.0        
+[25] multcomp_1.4-32     S7_1.0.0            estimability_1.5.1 
+[28] cli_3.6.6           withr_3.0.2         magrittr_2.0.3     
+[31] Rdpack_2.6.4        grid_4.5.0          xtable_1.8-4       
+[34] mvtnorm_1.3-3       sandwich_3.1-1      lifecycle_1.0.4    
+[37] nlme_3.1-168        reformulas_0.4.0    vctrs_0.6.5        
+[40] glue_1.8.0          farver_2.1.2        numDeriv_2016.8-1.1
+[43] ragg_1.5.2          codetools_0.2-20    zoo_1.8-14         
+[46] survival_3.8-3      tools_4.5.0         pkgconfig_2.0.3    

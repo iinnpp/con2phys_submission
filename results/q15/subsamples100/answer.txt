@@ -1,0 +1,48 @@
+Population spiking complexity was examined from stimulus presentation to trial end. Trial selection used exactly
+the same filtered trial table as Q11-Q13. A trial was retained only if trial_start, stim_start, outcome, and
+trial_end were all present and strictly ordered as trial_start < stim_start < outcome < trial_end. The final
+recorded trial for each mouse, defined as the trial with the maximum trial_id, was excluded. The source table
+contained 10,373 trials from 18 mice. The completeness and event-order criteria retained 10,361 trials; seven
+final trials had already failed those criteria, and excluding the remaining 11 final trials produced a dataset of
+10,350 trials.
+
+For each mouse and brain area, single-unit spikes in the half-open interval from stim_start to trial_end,
+[stim_start, trial_end), were converted to binary population rasters. Only complete time bins were retained from
+each trial, and trials were concatenated chronologically. The primary analysis used 20 ms bins; 10 and 50 ms bins
+were analyzed as temporal-resolution sensitivity checks. Each raster was serialized in time-major order, packed
+into bits, and compressed with level-1 DEFLATE, an LZ77-family compressor. Complexity was quantified as the
+observed compressed size divided by the compressed size of a rate-matched surrogate raster. Thus, larger values
+indicate less compressible population activity relative to independent spike timing with the same per-neuron
+binned spike counts.
+
+To prevent areas with more recorded neurons from receiving an advantage, the three areas were matched separately
+within each mouse to the size of that mouse's smallest recorded area population. Matched population sizes ranged
+from 5 to 32 neurons. Units were randomly subsampled and ordered 100 times. One independently seeded rate-matched
+surrogate was generated for every subsample by redistributing each selected neuron's active bins while preserving
+its total binned spike count. Complexity was averaged across the 100 subsamples, and the resulting mouse-level
+mean for each brain area was used as the independent observation for statistical inference.
+
+Differences among brain areas in the primary 20 ms analysis were tested with a linear mixed-effects model using
+brain area as a fixed effect and mouse_id as a random intercept. The model showed an overall effect of brain area
+on rate-normalized Lempel-Ziv complexity (F(2, 34) = 4.59, p = 0.0171). Model-estimated mean complexity was 0.9761
+for area 1 (95% CI: 0.9586-0.9936), 0.9431 for area 2 (0.9256-0.9606), and 0.9506 for area 3 (0.9331-0.9681).
+Those values are given in teh table above.
+
+Tukey-adjusted pairwise comparisons showed that complexity was higher in area 1 than in area 2. The area 1 minus
+area 2 difference was 0.0330 (95% CI: 0.0050 to 0.0610, p = 0.0178). Area 1 had a descriptively higher value than
+area 3, but this contrast was not significant after Tukey correction: the area 1 minus area 3 difference was
+0.0255 (-0.0025 to 0.0535, p = 0.0799). Areas 2 and 3 did not differ: the area 2 minus area 3 difference was
+-0.0075 (-0.0355 to 0.0205, p = 0.7886).
+
+The bin-width sensitivity model retained an overall brain-area effect (F(2, 136) = 20.28, p = 1.97e-08), but
+showed neither an overall bin-width effect (p = 0.7778) nor a brain-area-by-bin-width interaction (p = 0.5666).
+The descriptive ranking was therefore stable across 10, 20, and 50 ms bins.
+
+Therefore, brain area 1 had the highest descriptive population spiking complexity from stimulus presentation to
+trial end. However, it was not significantly higher than both other areas in the prespecified primary 20 ms
+analysis. 
+
+Code: D:\git_repos\con2phys_submission\code\questions\q15_complexity.py,
+D:\git_repos\con2phys_submission\code\questions\q15_complexity_stats.R
+
+Model output: D:/git_repos/con2phys_submission/results/q15/subsamples100/q15_complexity_stats_results.txt

@@ -1,0 +1,38 @@
+Population dimensionality was examined using single-unit spiking activity from stimulus presentation to outcome. Trial
+selection used exactly the same filtered trial table as Q11 and Q12. A trial was retained only if trial_start, stim_start,
+outcome, and trial_end were all present and strictly ordered as trial_start < stim_start < outcome < trial_end. The final
+recorded trial for each mouse, defined as the trial with the maximum trial_id, was excluded. The source table contained
+10,373 trials from 18 mice. The completeness and event-order criteria retained 10,361 trials; seven final trials had already
+failed those criteria, and excluding the remaining 11 final trials produced a dataset of 10,350 trials.
+
+For each retained trial and neuron, activity was represented by the mean firing rate in the half-open interval from
+stim_start to outcome, [stim_start, outcome). Spike count was divided by the actual interval duration for each trial. This
+produced one trial-by-neuron firing-rate matrix for every mouse and brain area. Each neuron's firing rates were centered and
+standardized across trials before principal component analysis (PCA), so the dimensionality estimate reflected population
+covariation rather than differences in absolute firing-rate scale. Neurons with no trial-to-trial variance were represented
+by zeros after standardization.
+
+Dimensionality was quantified primarily by the PCA participation ratio, (sum(lambda))^2 / sum(lambda^2), where lambda denotes
+the PCA eigenvalues. This measure gives the effective number of dimensions contributing to the population activity. To
+prevent an area with more recorded neurons from having a higher possible dimensionality simply because it contained more
+units, the three brain areas were matched separately within each mouse to the size of that mouse's smallest recorded area
+population. The matched population sizes ranged from 5 to 32 neurons. Units were randomly subsampled 100 times, and the
+participation ratio was averaged across subsamples. The resulting mouse-level mean for each brain area was used as the
+independent observation for statistical inference.
+
+Differences among brain areas were tested with a linear mixed-effects model using brain area as a fixed effect and mouse_id
+as a random intercept. The model showed an overall effect of brain area on participation ratio
+(F(2, 34) = 5.88, p = 0.0064). Model-estimated mean participation ratios were 11.48 for area 1
+(95% CI: 9.46-13.50), 9.32 for area 2 (7.30-11.34), and 9.21 for area 3 (7.20-11.23). Those values are given in teh table above.
+
+Tukey-adjusted pairwise comparisons showed that dimensionality was higher in area 1 than in both other areas. The area 1
+minus area 2 difference was 2.16 (95% CI: 0.33-3.99, p = 0.0175), and the area 1 minus area 3 difference was 2.27
+(0.44-4.10, p = 0.0123). Areas 2 and 3 did not differ: the area 2 minus area 3 difference was 0.11
+(-1.72 to 1.93, p = 0.9889). 
+
+Therefore, neural activity from stimulus presentation to outcome had the highest dimensionality in brain area 1. 
+
+Code: D:\git_repos\con2phys_submission\code\questions\q13.ipynb,
+D:\git_repos\con2phys_submission\code\questions\q13_dimensionality_stats.R
+
+Model output: D:\git_repos\con2phys_submission\results\q13\q13_dimensionality_stats_results.txt
