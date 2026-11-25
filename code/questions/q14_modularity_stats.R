@@ -1,6 +1,7 @@
 suppressPackageStartupMessages({
   library(lmerTest)
   library(emmeans)
+  library(ggplot2)
 })
 
 repository_dir <- Sys.getenv(
@@ -9,15 +10,32 @@ repository_dir <- Sys.getenv(
 )
 output_dir <- file.path(repository_dir, "results", "q14")
 data_path <- file.path(output_dir, "q14_modularity_mouse_area.csv")
+sensitivity_data_path <- file.path(
+  output_dir,
+  "q14_modularity_sensitivity_mouse_area.csv"
+)
 results_path <- file.path(output_dir, "q14_modularity_stats_results.txt")
 means_path <- file.path(output_dir, "q14_modularity_stats_means.csv")
 overall_path <- file.path(output_dir, "q14_modularity_stats_overall_effect.csv")
 pairwise_path <- file.path(output_dir, "q14_modularity_stats_pairwise_tukey.csv")
 permutation_path <- file.path(output_dir, "q14_modularity_permutation_results.csv")
+sensitivity_means_path <- file.path(
+  output_dir,
+  "q14_modularity_sensitivity_area_means.csv"
+)
 answer_path <- file.path(output_dir, "answer.txt")
+mean_plot_path <- file.path(
+  output_dir,
+  "q14_modularity_stats_means_95ci.png"
+)
+pairwise_plot_path <- file.path(
+  output_dir,
+  "q14_modularity_stats_pairwise_tukey.png"
+)
 
 dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 modularity <- read.csv(data_path)
+sensitivity <- read.csv(sensitivity_data_path)
 
 required_columns <- c(
   "mouse_id", "brain_area", "density", "gamma", "n_available_units",
@@ -194,6 +212,120 @@ pairwise_permutation$omnibus_permutation_p <- omnibus_permutation_p
 pairwise_permutation$n_omnibus_permutations <- n_omnibus_permutations
 write.csv(pairwise_permutation, permutation_path, row.names = FALSE)
 
+sensitivity_area_means <- aggregate(
+  mean_delta_q ~ setting_type + density + gamma + brain_area,
+  data = sensitivity,
+  FUN = mean
+)
+sensitivity_area_means <- sensitivity_area_means[order(
+  sensitivity_area_means$setting_type,
+  sensitivity_area_means$density,
+  sensitivity_area_means$gamma,
+  sensitivity_area_means$brain_area
+), ]
+setting_key <- paste(
+  sensitivity_area_means$setting_type,
+  sensitivity_area_means$density,
+  sensitivity_area_means$gamma,
+  sep = ":"
+)
+lowest_by_setting <- tapply(
+  seq_len(nrow(sensitivity_area_means)),
+  setting_key,
+  function(indices) sensitivity_area_means$brain_area[
+    indices[which.min(sensitivity_area_means$mean_delta_q[indices])]
+  ]
+)
+all_sensitivity_lowest_area_1 <- all(lowest_by_setting == 1)
+write.csv(sensitivity_area_means, sensitivity_means_path, row.names = FALSE)
+
+############################################################
+### Usual statistical plots
+############################################################
+
+mean_ci_plot <- ggplot(
+  area_means_ci,
+  aes(x = brain_area, y = emmean)
+) +
+  geom_errorbar(
+    aes(ymin = lower.CL, ymax = upper.CL),
+    width = 0.08,
+    linewidth = 0.7
+  ) +
+  geom_point(size = 3) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  scale_x_discrete(labels = area_labels) +
+  labs(
+    title = "Model-estimated modularity and 95% CI",
+    subtitle = "Whole-recording spike networks; chance-corrected delta Q",
+    x = "Brain area",
+    y = "Mean chance-corrected modularity (delta Q)"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    panel.grid.major = element_line(color = "grey75", linewidth = 0.4),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
+  )
+
+ggsave(
+  mean_plot_path,
+  plot = mean_ci_plot,
+  width = 7.0,
+  height = 4.7,
+  dpi = 150
+)
+
+contrast_span <- diff(range(c(
+  pairwise_tukey$lower.CL,
+  pairwise_tukey$upper.CL
+)))
+pairwise_tukey$label_x <- pairwise_tukey$upper.CL + max(
+  contrast_span * 0.04,
+  0.002
+)
+
+pairwise_plot <- ggplot(
+  pairwise_tukey,
+  aes(x = estimate, y = contrast_label)
+) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "grey50") +
+  geom_errorbar(
+    aes(xmin = lower.CL, xmax = upper.CL),
+    orientation = "y",
+    width = 0.12,
+    linewidth = 0.7
+  ) +
+  geom_point(size = 3) +
+  geom_text(
+    aes(x = label_x, label = significance),
+    hjust = 0,
+    size = 5
+  ) +
+  scale_x_continuous(expand = expansion(mult = c(0.08, 0.18))) +
+  labs(
+    title = "Pairwise brain-area differences and 95% CI",
+    subtitle = "Tukey-adjusted confidence intervals and p-values",
+    x = "Difference in chance-corrected modularity (delta Q)",
+    y = NULL
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    panel.grid.major.x = element_line(color = "grey75", linewidth = 0.4),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
+  )
+
+ggsave(
+  pairwise_plot_path,
+  plot = pairwise_plot,
+  width = 9.0,
+  height = 4.7,
+  dpi = 150
+)
+
 ############################################################
 ### Multiple-choice decision rule
 ############################################################
@@ -256,49 +388,128 @@ cat("Permutations:", n_omnibus_permutations, "\n")
 cat("p-value:", omnibus_permutation_p, "\n")
 cat("\nExact paired sign-flip tests with Holm adjustment\n")
 print(pairwise_permutation)
+cat("\nDensity and resolution sensitivity\n")
+cat("Settings evaluated:", length(lowest_by_setting), "\n")
+cat("Area 1 descriptively lowest in every setting:", all_sensitivity_lowest_area_1, "\n")
 cat("\nDecision rule result\n")
 cat("Descriptively lowest area:", area_labels[lowest_area], "\n")
 cat("Significantly lower than both other areas:", lower_than_both, "\n")
 cat("Q14 answer:", answer_choice, "\n")
+cat("\nSaved statistical plots\n")
+cat("Area means:", mean_plot_path, "\n")
+cat("Pairwise comparisons:", pairwise_plot_path, "\n")
 sink()
 
-mean_lookup <- setNames(area_means_ci$emmean, area_means_ci$brain_area)
-ci_low_lookup <- setNames(area_means_ci$lower.CL, area_means_ci$brain_area)
-ci_high_lookup <- setNames(area_means_ci$upper.CL, area_means_ci$brain_area)
-overall_p <- overall_effect[overall_effect$term == "brain_area", "Pr(>F)"]
-
-answer_lines <- c(
-  paste0(
-    "Whole-recording spike-network modularity was estimated separately for each mouse and brain area from the ",
-    "same pairwise STTC values used in Q4 (dt = 100 ms). Neuron counts were matched across areas within each ",
-    "mouse by repeated subsampling. Mice with fewer than 10 neurons in any area were excluded, leaving 14 ",
-    "complete mice. For each subsample, the strongest 20% of positive STTC edges formed a weighted graph. ",
-    "Weighted Leiden community detection was repeated across random initializations at resolution gamma = 1."
-  ),
-  "",
-  paste0(
-    "Modularity was chance-corrected by subtracting the mean optimized modularity of degree-preserving, ",
-    "edge-rewired null graphs with the observed edge weights shuffled. The resulting delta Q values were ",
-    "averaged across 100 neuron subsamples to produce one value per mouse and brain area; subsamples and edges ",
-    "were not treated as independent observations."
-  ),
-  "",
-  paste0(
-    "A linear mixed-effects model with brain area as a fixed effect and mouse as a random intercept gave an ",
-    "overall brain-area p-value of ", format.pval(overall_p, digits = 4), ". Model-estimated mean delta Q values ",
-    "(95% CI) were ",
-    sprintf("%.4f (%.4f to %.4f)", mean_lookup["1"], ci_low_lookup["1"], ci_high_lookup["1"]),
-    " for area 1, ",
-    sprintf("%.4f (%.4f to %.4f)", mean_lookup["2"], ci_low_lookup["2"], ci_high_lookup["2"]),
-    " for area 2, and ",
-    sprintf("%.4f (%.4f to %.4f)", mean_lookup["3"], ci_low_lookup["3"], ci_high_lookup["3"]),
-    " for area 3."
-  ),
-  "",
-  paste0(
-    "Decision rule: select an area only when it has the lowest model-estimated delta Q and is lower than both ",
-    "other areas in Tukey-adjusted comparisons (p < 0.05). Q14 answer: ", answer_choice, "."
+area_effect <- overall_effect[overall_effect$term == "brain_area", ]
+mean_text <- sprintf(
+  "%.4f for area %s (95%% CI %.4f to %.4f)",
+  area_means_ci$emmean, area_means_ci$brain_area,
+  area_means_ci$lower.CL, area_means_ci$upper.CL
+)
+contrast_text <- sprintf(
+  "The area %s minus area %s difference was %.4f (95%% CI %.4f to %.4f, p = %.4f).",
+  pairwise_tukey$contrast_area_1, pairwise_tukey$contrast_area_2,
+  pairwise_tukey$estimate, pairwise_tukey$lower.CL, pairwise_tukey$upper.CL,
+  pairwise_tukey$p.value
+)
+sensitivity_ranking <- if (length(unique(lowest_by_setting)) == 1L) {
+  sprintf(
+    "Brain area %s had the lowest mean delta Q across all %d settings, including the primary setting.",
+    lowest_by_setting[[1]], length(lowest_by_setting)
   )
+} else {
+  "The area with the lowest mean delta Q varied across settings."
+}
+decision_text <- if (lower_than_both) {
+  "It was lower than both other areas at Tukey-adjusted p < 0.05."
+} else {
+  "The Tukey-adjusted comparisons provided insufficient evidence that it was lower than both other areas."
+}
+
+answer_paragraphs <- c(
+  paste0(
+    "Modularity was estimated from single-unit spikes across the entire recording, including the intervals ",
+    "between trials. We reused the pairwise Spike Time Tiling Coefficient (STTC) values from Q4. For each ",
+    "mouse, Q4 used a window starting at the earliest recorded spike and extending for the full LFP-derived ",
+    "recording duration. Two spikes counted as close in time if they occurred within 100 ms of each other. ",
+    "STTC measures how often one neuron's spikes fall close to the other neuron's spikes, accounting for how ",
+    "much of the recording is already close to spikes from each neuron. A positive value indicates more ",
+    "coincidence than expected from that coverage. Only pairs recorded within the same mouse and area were used."
+  ),
+  paste0(
+    "To compare networks of the same size within each mouse, we matched all three areas to the neuron count ",
+    "in that mouse's smallest recorded area. Four of 18 mice had fewer than 10 neurons in at least one area. ",
+    "This left ", nlevels(modularity$mouse_id), " mice with matched sets of ",
+    min(modularity$n_sampled_units), " to ", max(modularity$n_sampled_units), " neurons per area. For each ",
+    "mouse and area, we drew 100 random neuron sets, sampling without replacement within each set. The ",
+    "smallest area contributed all its neurons each time. In each network, the neurons were the nodes and ",
+    "the links were pairs with the highest positive STTC values. The number of links was 20% of all possible ",
+    "pairs among the selected neurons, rounded up to a whole number. We used the original STTC values as ",
+    "link weights, so stronger spike-time associations contributed more to the score."
+  ),
+  paste0(
+    "Modularity (Q) measures how clearly neurons form groups with strong links within each group. For a ",
+    "given grouping, Q compares the amount of link weight inside the groups with the amount expected from ",
+    "each neuron's total link weight. A higher Q means that more of the network's weight is concentrated ",
+    "within groups than expected. We used weighted Leiden community detection at resolution gamma = 1 to ",
+    "find groups and kept the highest Q from 25 runs with different random seeds."
+  ),
+  paste0(
+    "Even networks with randomly arranged links can yield a positive Q when the grouping is chosen to ",
+    "maximize it. To estimate that baseline, we made 20 randomized versions of every observed network. We ",
+    "swapped which neurons were linked while keeping the number of links per neuron fixed, then shuffled ",
+    "the original STTC weights across those links. This kept the same number of neurons and links and the ",
+    "same set of weights. We optimized Q separately for each randomized network at the same resolution, ",
+    "using 10 runs per network. Chance-corrected modularity (delta Q) was the observed Q minus the mean Q ",
+    "of the 20 randomized networks. A positive delta Q indicates stronger grouping than the randomized ",
+    "baseline, and a value near zero indicates a similar amount of grouping. We averaged delta Q across ",
+    "the 100 neuron sets to obtain one score for each mouse and area. The mouse was the independent unit."
+  ),
+  paste0(
+    "We compared the three areas using a linear mixed-effects model with brain area as a fixed effect ",
+    "and mouse as a random intercept to account for repeated measurements from each mouse. The overall ",
+    sprintf(
+      "area comparison gave F(%.0f, %.0f) = %.2f, p = %.4f. ",
+      area_effect$NumDF, area_effect$DenDF, area_effect[["F value"]], area_effect[["Pr(>F)"]]
+    ),
+    "Model-estimated mean delta Q was ", paste(mean_text[1:2], collapse = ", "),
+    ", and ", mean_text[3], "."
+  ),
+  paste0(
+    "We adjusted the three pairwise comparisons using Tukey's method. ",
+    paste(contrast_text, collapse = " ")
+  ),
+  paste0(
+    if (lme4::isSingular(model)) {
+      "The random-intercept variance was estimated at zero. "
+    } else "",
+    "As a robustness check, we ran a permutation test that preserved the pairing within each mouse. ",
+    sprintf(
+      "Shuffling the area labels within mice %s times gave p = %.4f.",
+      format(n_omnibus_permutations, big.mark = ","), omnibus_permutation_p
+    )
+  ),
+  paste0(
+    "To check how much the ranking depended on how the networks were constructed and scored, we varied ",
+    "the link density (10%, 15%, 20%, 25%, and 30% at gamma = 1) and the resolution parameter ",
+    "(gamma = 0.5, 0.75, 1, 1.25, 1.5, and 2 at 20% density). The resolution parameter controls the ",
+    "scale of the groups the score favors. Each additional setting used 20 neuron sets and 10 randomized ",
+    "networks per set. ", sensitivity_ranking
+  ),
+  paste0(
+    area_labels[lowest_area], " had the lowest estimated modularity in the primary analysis. ",
+    decision_text, " The Q14 answer is \"", answer_choice, "\"."
+  )
+)
+answer_lines <- c(
+  unlist(lapply(answer_paragraphs, function(paragraph) c(strwrap(paragraph, width = 105), ""))),
+  "Code files",
+  "code/questions/q14_modularity.py",
+  "code/questions/q14.ipynb",
+  "code/questions/q14_modularity_stats.R",
+  "",
+  "Model output",
+  "results/q14/q14_modularity_stats_results.txt"
 )
 writeLines(answer_lines, answer_path)
 

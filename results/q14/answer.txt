@@ -1,0 +1,61 @@
+Modularity was estimated from single-unit spikes across the entire recording, including the intervals
+between trials. I reused the pairwise STTC values from Q4. For each
+mouse, Q4 used a window starting at the earliest recorded spike and extending for the full LFP-derived
+recording duration. Two spikes counted as close in time if they occurred within 100 ms of each other.
+Only pairs recorded within the same mouse and area were used.
+
+To compare networks of the same size within each mouse, I matched all three areas to the neuron count
+in that mouse's smallest recorded area. Four of 18 mice had fewer than 10 neurons in at least one area.
+This left 14 mice with matched sets of 10 to 32 neurons per area. For each mouse and area, we drew 100
+random neuron sets, sampling without replacement within each set. The smallest area contributed all its
+neurons each time. In each network, the neurons were the nodes and the links were pairs with the highest
+positive STTC values. The number of links was 20% of all possible pairs among the selected neurons,
+rounded up to a whole number. I used the original STTC values as link weights, so stronger spike-time
+associations contributed more to the score.
+
+Modularity (Q) measures how clearly neurons form groups with strong links within each group. For a given
+grouping, Q compares the amount of link weight inside the groups with the amount expected from each
+neuron's total link weight. A higher Q means that more of the network's weight is concentrated within
+groups than expected. I used weighted Leiden community detection at resolution gamma = 1 to find groups
+and kept the highest Q from 25 runs with different random seeds.
+
+Even networks with randomly arranged links can yield a positive Q when the grouping is chosen to
+maximize it. To estimate that baseline, I made 20 randomized versions of every observed network. I
+swapped which neurons were linked while keeping the number of links per neuron fixed, then shuffled the
+original STTC weights across those links. This kept the same number of neurons and links and the same
+set of weights. I optimized Q separately for each randomized network at the same resolution, using 10
+runs per network. Chance-corrected modularity (delta Q) was the observed Q minus the mean Q of the 20
+randomized networks. A positive delta Q indicates stronger grouping than the randomized baseline, and a
+value near zero indicates a similar amount of grouping. I averaged delta Q across the 100 neuron sets
+to obtain one score for each mouse and area. The mouse was the independent unit.
+
+I compared the three areas using a linear mixed-effects model with brain area as a fixed effect and
+mouse as a random intercept to account for repeated measurements from each mouse. The overall area
+comparison gave F(2, 39) = 1.58, p = 0.2180. Model-estimated mean delta Q was 0.0242 for area 1 (95% CI
+-0.0015 to 0.0499), 0.0398 for area 2 (95% CI 0.0141 to 0.0655), and 0.0562 for area 3 (95% CI 0.0305 to
+0.0819). Those values are reported in the table above.
+
+I adjusted the three pairwise comparisons using Tukey's method. The area 1 minus area 2 difference was
+-0.0156 (95% CI -0.0594 to 0.0282, p = 0.6637). The area 1 minus area 3 difference was -0.0320 (95% CI
+-0.0758 to 0.0118, p = 0.1896). The area 2 minus area 3 difference was -0.0164 (95% CI -0.0602 to
+0.0274, p = 0.6359).
+
+The random-intercept variance was estimated at zero. As a robustness check, a permutation test
+that preserved the pairing within each mouse was done. Shuffling the area labels within mice 100,000 times gave p
+= 0.2692.
+
+To check how much the ranking depended on how the networks were constructed and scored, I varied the
+link density (10%, 15%, 20%, 25%, and 30% at gamma = 1) and the resolution parameter (gamma = 0.5, 0.75,
+1, 1.25, 1.5, and 2 at 20% density). The resolution parameter controls the scale of the groups the score
+favors. Each additional setting used 20 neuron sets and 10 randomized networks per set. Brain area 1 had
+the lowest mean delta Q across all 10 settings, including the primary setting.
+
+Brain area 1 had the lowest estimated modularity but the Tukey-adjusted comparisons
+provided insufficient evidence that it was lower than both other areas. 
+Code files
+code/questions/q14_modularity.py
+code/questions/q14.ipynb
+code/questions/q14_modularity_stats.R
+
+Model output
+results/q14/q14_modularity_stats_results.txt

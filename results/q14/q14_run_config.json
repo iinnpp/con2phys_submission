@@ -1,0 +1,97 @@
+{
+  "question": "Q14: brain area with the lowest whole-recording modularity",
+  "input": "D:\\git_repos\\con2phys_submission\\results\\q4\\sttc_pairs_100ms.csv",
+  "output_directory": "D:\\git_repos\\con2phys_submission\\results\\q14",
+  "signal": "single-unit spike trains",
+  "connectivity": "Q4 whole-recording pairwise STTC, dt = 0.1 s, identical recording windows",
+  "network_unit": "one undirected weighted network per mouse and brain area",
+  "edge_rule": "strongest fixed proportion of positive STTC edges",
+  "community_detection": "weighted Leiden RB configuration partition",
+  "primary_density": 0.2,
+  "primary_resolution_gamma": 1.0,
+  "chance_correction": "delta_Q = optimized observed Q - mean optimized Q from degree-preserving double-edge-swap nulls with shuffled observed edge weights",
+  "minimum_matched_units": 10,
+  "eligible_mice": [
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18
+  ],
+  "excluded_mice": [
+    1,
+    4,
+    10,
+    16
+  ],
+  "n_primary_subsamples": 100,
+  "n_primary_nulls_per_subsample": 20,
+  "n_primary_observed_leiden_restarts": 25,
+  "n_primary_null_leiden_restarts": 10,
+  "n_sensitivity_subsamples": 20,
+  "n_sensitivity_nulls_per_subsample": 10,
+  "sensitivity_settings": [
+    {
+      "density": 0.1,
+      "gamma": 1.0,
+      "type": "density"
+    },
+    {
+      "density": 0.15,
+      "gamma": 1.0,
+      "type": "density"
+    },
+    {
+      "density": 0.25,
+      "gamma": 1.0,
+      "type": "density"
+    },
+    {
+      "density": 0.3,
+      "gamma": 1.0,
+      "type": "density"
+    },
+    {
+      "density": 0.2,
+      "gamma": 0.5,
+      "type": "resolution"
+    },
+    {
+      "density": 0.2,
+      "gamma": 0.75,
+      "type": "resolution"
+    },
+    {
+      "density": 0.2,
+      "gamma": 1.25,
+      "type": "resolution"
+    },
+    {
+      "density": 0.2,
+      "gamma": 1.5,
+      "type": "resolution"
+    },
+    {
+      "density": 0.2,
+      "gamma": 2.0,
+      "type": "resolution"
+    }
+  ],
+  "random_seed": 14042,
+  "elapsed_seconds": 517.6956544999994,
+  "software": {
+    "igraph": "1.0.0",
+    "leidenalg": "0.12.0",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2"
+  }
+}

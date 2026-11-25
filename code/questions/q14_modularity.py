@@ -171,7 +171,7 @@ def degree_preserving_rewire(
     # seeded instance makes every null graph reproducible without touching
     # NumPy's independent generator used for edge-weight permutation.
     ig.set_random_number_generator(random.Random(seed))
-    graph.rewire(n=requested_swaps, mode="simple")
+    graph.rewire(n=requested_swaps, allowed_edge_types="simple")
     rewired = [tuple(sorted(edge.tuple)) for edge in graph.es]
     changed_edges = len(original_edges - set(rewired))
     return rewired, changed_edges
