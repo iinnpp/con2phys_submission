@@ -1,0 +1,40 @@
+Q6 answer: Not enough data / no differences
+
+Full-recording population spike counts from 18 mice, with 5 matched unit draws per mouse.
+Primary conditional transfer entropy setting: 10 ms bins and 100 ms short history.
+The score is the held-out gain in categorical log probability from adding source history,
+conditional on the target and third-area short histories and the slow target state.
+The primary comparison uses bits per original target spike. The score in bits per bin is also saved.
+The target response uses counts 0, 1, 2, 3, 4 and 5+; histories use training-fold count tertiles.
+Negative estimates can arise when the estimated full distribution predicts worse on held-out bins.
+The mouse is the independent unit. Direction mean confidence intervals are marginal 95% t intervals.
+The three paired direction comparisons use Tukey-adjusted p-values and simultaneous 95% intervals.
+Their standard errors come from within-mouse differences. Tukey adjustment is approximate when these standard errors differ.
+The three tests against zero form a separate family with Holm-adjusted p-values.
+A direction is selected if it is above zero and exceeds both alternatives at adjusted p < 0.05.
+
+Primary mean bits per target spike [95% CI] and source-shift diagnostic mean:
+  1->2: -0.02109 [-0.02799, -0.01418]; shifted -0.02469
+  3->2: -0.02386 [-0.03097, -0.01676]; shifted -0.02509
+  3->1: -0.01525 [-0.01953, -0.01096]; shifted -0.01585
+
+Primary tests against zero (Holm-adjusted p):
+  1->2: -0.02109, p = 6.12e-06
+  3->2: -0.02386, p = 3.66e-06
+  3->1: -0.01525, p = 2.58e-06
+
+Primary paired contrasts in bits per target spike (Tukey-adjusted 95% CI and p):
+  1->2 vs 3->2: 0.00278 [0.00038, 0.00518], p = 0.0222
+  1->2 vs 3->1: -0.00584 [-0.01519, 0.00351], p = 0.2719
+  3->2 vs 3->1: -0.00862 [-0.01773, 0.00049], p = 0.0653
+
+Descriptive sensitivity ranks by bin width/history (ms):
+  10/100: 3->1
+  5/100: 3->1
+  10/50: 3->1
+  10/250: 3->1
+  20/100: 3->1
+
+Scores describe directional predictability. Unmeasured shared inputs may contribute to the gains.
+Local source shifts are a diagnostic for disrupted alignment. They also disrupt source relationships
+with other predictors, so the primary inference uses the paired mouse estimates.

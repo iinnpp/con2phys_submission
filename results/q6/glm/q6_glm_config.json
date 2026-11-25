@@ -1,0 +1,98 @@
+{
+  "spikes_csv": "E:\\con2phys_submission\\dataset\\full_sua_dataset.csv",
+  "settings_ms": [
+    [
+      10,
+      100
+    ],
+    [
+      5,
+      100
+    ],
+    [
+      20,
+      100
+    ],
+    [
+      10,
+      50
+    ],
+    [
+      10,
+      250
+    ]
+  ],
+  "primary_ms": [
+    10,
+    100
+  ],
+  "n_folds": 3,
+  "n_subsamples": 5,
+  "max_training_bins_per_fold": 60000,
+  "ridge_alpha": 0.0001,
+  "slow_target_lags_ms": [
+    1000,
+    5000
+  ],
+  "seed": 42,
+  "primary_shift_diagnostic": true,
+  "shift_block_ms": 20000,
+  "minimum_shift_ms": 2000,
+  "history_edges_ms": {
+    "10/100": [
+      0,
+      10,
+      20,
+      40,
+      100
+    ],
+    "5/100": [
+      0,
+      5,
+      20,
+      40,
+      100
+    ],
+    "20/100": [
+      0,
+      20,
+      40,
+      100
+    ],
+    "10/50": [
+      0,
+      10,
+      20,
+      40,
+      50
+    ],
+    "10/250": [
+      0,
+      10,
+      20,
+      40,
+      100,
+      250
+    ]
+  },
+  "mouse_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "spikes_csv": "E:\\con2phys_submission\\dataset\\full_sua_dataset.csv",
+  "bin_ms": 5,
+  "settings_jitter_ms_max_lag_ms": [
+    [
+      200,
+      50
+    ],
+    [
+      200,
+      100
+    ],
+    [
+      100,
+      50
+    ],
+    [
+      400,
+      50
+    ]
+  ],
+  "primary_jitter_ms_max_lag_ms": [
+    200,
+    50
+  ],
+  "jitter": "exact mean over independent uniform within-interval jitter, conditional on each area's interval counts",
+  "trim": "keep complete jitter windows at every tested width; common 400 ms multiple",
+  "normalization": "sqrt(product of the centered sum of squares of both population bin-count series)",
+  "primary_metric": "mean corrected CCG at +5 to +50 ms minus mean at mirrored negative lags",
+  "lag_convention": "positive lag means the target follows the source; zero lag excluded from score",
+  "n_subsamples": 5,
+  "seed": 42,
+  "mouse_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "elapsed_seconds": 55.3
+}

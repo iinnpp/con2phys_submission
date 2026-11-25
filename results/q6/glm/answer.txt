@@ -1,0 +1,37 @@
+Q6 answer: Brain area 1 => Brain area 2
+
+Full-recording population spike counts from 18 mice, with 5 matched unit draws per mouse.
+Primary model: 10 ms bins and 100 ms short history.
+For each source, the score is the held-out Poisson log-likelihood gain per target spike in bits
+after conditioning on target history, third-area history, and a slow past target count.
+The mouse is the independent unit. Direction mean confidence intervals are marginal 95% t intervals.
+The three paired direction comparisons use Tukey-adjusted p-values and simultaneous 95% intervals.
+Their standard errors come from within-mouse differences. Tukey adjustment is approximate when these standard errors differ.
+The three tests against zero form a separate family with Holm-adjusted p-values.
+A direction is selected if it is above zero and exceeds both alternatives at adjusted p < 0.05.
+
+Primary mean bits per target spike [95% CI] and source-shift diagnostic mean:
+  1->2: 0.00251 [0.00106, 0.00396]; shifted 0.00014
+  3->2: 0.00034 [-0.00003, 0.00071]; shifted -0.00013
+  3->1: 0.00028 [0.00001, 0.00055]; shifted -0.00004
+
+Primary tests against zero (Holm-adjusted p):
+  1->2: 0.00251, p = 0.00592
+  3->2: 0.00034, p = 0.08338
+  3->1: 0.00028, p = 0.08338
+
+Primary paired contrasts in bits per target spike (Tukey-adjusted 95% CI and p):
+  1->2 vs 3->2: 0.00217 [0.00027, 0.00406], p = 0.0239
+  1->2 vs 3->1: 0.00222 [0.00042, 0.00403], p = 0.0151
+  3->2 vs 3->1: 0.00006 [-0.00042, 0.00053], p = 0.9475
+
+Descriptive sensitivity ranks by bin width/history (ms):
+  10/100: 1->2
+  5/100: 1->2
+  10/50: 1->2
+  10/250: 1->2
+  20/100: 1->2
+
+Scores describe directional predictability. Unmeasured shared inputs may contribute to the gains.
+Local source shifts are a diagnostic for disrupted alignment. They also disrupt source relationships
+with other predictors, so the primary inference uses the paired mouse estimates.

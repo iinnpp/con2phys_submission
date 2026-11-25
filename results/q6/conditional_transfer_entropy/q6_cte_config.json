@@ -1,0 +1,81 @@
+{
+  "spikes_csv": "E:\\con2phys_submission\\dataset\\full_sua_dataset.csv",
+  "settings_ms": [
+    [
+      10,
+      100
+    ],
+    [
+      5,
+      100
+    ],
+    [
+      20,
+      100
+    ],
+    [
+      10,
+      50
+    ],
+    [
+      10,
+      250
+    ]
+  ],
+  "primary_ms": [
+    10,
+    100
+  ],
+  "n_folds": 3,
+  "n_subsamples": 5,
+  "seed": 42,
+  "target_states": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5+"
+  ],
+  "recent_lags_ms": [
+    0,
+    20
+  ],
+  "older_lags_ms": [
+    20,
+    "history_ms"
+  ],
+  "slow_target_lags_ms": [
+    1000,
+    5000
+  ],
+  "history_encoding": "training-fold count tertiles; integer ties kept together",
+  "conditioning": "recent and older target and third-area states plus slow target state",
+  "context_prior_count": 12.0,
+  "source_prior_count": 24.0,
+  "primary_metric": "held-out conditional log-probability gain / uncapped held-out target spikes",
+  "secondary_metric": "held-out conditional log-probability gain per bin",
+  "primary_shift_diagnostic": true,
+  "shift_block_ms": 20000,
+  "minimum_shift_ms": 2000,
+  "mouse_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ]
+}

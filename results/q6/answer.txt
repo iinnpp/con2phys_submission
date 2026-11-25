@@ -1,0 +1,45 @@
+Directed functional connectivity was estimated from simultaneously recorded single-unit activity over
+the full recordings of 18 mice. Within each mouse, I matched the three areas to the unit count of
+the smallest recorded area, drew five random sets of matched units, and summed their spikes into
+population counts.
+
+The primary analysis used a regularized Poisson GLM with 10 ms bins and 100 ms of recent history.
+For each direction, I compared a full model with a model omitting the source area's history. Both
+models included the target's own history, the third area's history, and a slow target activity
+term. I used three contiguous time blocks for cross-validation and expressed the held-out
+log-likelihood gain in bits per target spike. I averaged the five draws within each mouse and
+used the mouse as the independent observation.
+
+Mean gains were 0.00251 for area 1 => 2 (95% CI 0.00106 to 0.00396), 0.00034 for area 3 => 2
+(-0.00003 to 0.00071), and 0.00028 for area 3 => 1 (0.00001 to 0.00055). Those numbers are reported 
+in the table above. Area 1 => 2 was above
+zero (Holm-adjusted p = 0.00592). In paired mouse-level comparisons, it exceeded area 3 => 2 by
+0.00217 (Tukey-adjusted 95% CI 0.00027 to 0.00406, p = 0.0239) and area 3 => 1 by 0.00222
+(0.00042 to 0.00403, p = 0.0151). Area 1 => 2 ranked first at all five bin-width and history
+settings tested.
+
+Jitter-corrected cross-correlograms pointed in the same direction. With 5 ms lag bins and 200 ms
+jitter windows, area 1 => 2 peaked at +10 ms and had a mean positive-minus-negative asymmetry
+over mirrored 5-50 ms lags of 0.00209 normalized CCG units (95% CI 0.00032 to 0.00386,
+Holm-adjusted p = 0.0462). The asymmetry exceeded area 3 => 2 (Tukey-adjusted p = 0.0028), while
+the comparison with area 3 => 1 was inconclusive (p = 0.102). 
+
+Conditional transfer entropy was
+inconclusive because none of the candidate directions gave a positive mean held-out gain. It is 
+tricky to use for the spiking data (see https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008054).
+
+Based on the primary Poisson GLM, brain area 1 => brain area 2 had the strongest directed
+functional connectivity among the three candidates.
+
+Code
+D:/git_repos/con2phys_submission/code/questions/q6_glm.py
+D:/git_repos/con2phys_submission/code/questions/q6_glm_stats.R
+D:/git_repos/con2phys_submission/code/questions/q6_ccg_jittered.py
+D:/git_repos/con2phys_submission/code/questions/q6_ccg_jittered_stats.R
+D:/git_repos/con2phys_submission/code/questions/q6_cte.py
+D:/git_repos/con2phys_submission/code/questions/q6_cte_stats.R
+
+Model output
+D:/git_repos/con2phys_submission/results/q6/glm/stats_output.txt
+D:/git_repos/con2phys_submission/results/q6/ccg_jittered/stats_output.txt
+D:/git_repos/con2phys_submission/results/q6/conditional_transfer_entropy/stats_output.txt

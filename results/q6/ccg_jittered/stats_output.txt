@@ -1,0 +1,37 @@
+Q6 answer: Not enough data / no differences
+
+Full-recording population spike counts from 18 mice, with 5 matched unit draws per mouse.
+Primary CCG: 5 ms lag bins, 200 ms jitter, mirrored lags through 50 ms.
+The normalized correlogram subtracts the exact mean cross-count under independent interval jitter.
+That baseline preserves each area's spike count per jitter window. Positive lags mean the target follows the source.
+The asymmetry score is the mean corrected CCG at the positive lags minus its mean at mirrored negative lags.
+The zero-lag bin is excluded. Both sides use the same population count variance normalization.
+The mouse is the independent unit. Direction mean confidence intervals are marginal 95% t intervals.
+The three paired direction comparisons use Tukey-adjusted p-values and simultaneous 95% intervals.
+Their standard errors come from within-mouse differences. Tukey adjustment is approximate when these standard errors differ.
+The three tests against zero form a separate family with Holm-adjusted p-values.
+A direction is selected if it is above zero and exceeds both alternatives at adjusted p < 0.05.
+
+Primary mean normalized CCG units [95% CI]:
+  1->2: 0.00209 [0.00032, 0.00386]
+  3->2: -0.00430 [-0.00651, -0.00208]
+  3->1: -0.00043 [-0.00135, 0.00050]
+
+Primary tests against zero (Holm-adjusted p):
+  1->2: 0.00209, p = 0.04618
+  3->2: -0.00430, p = 0.00226
+  3->1: -0.00043, p = 0.34474
+
+Primary paired contrasts in normalized CCG units (Tukey-adjusted 95% CI and p):
+  1->2 vs 3->2: 0.00639 [0.00223, 0.01054], p = 0.002836
+  1->2 vs 3->1: 0.00252 [-0.00043, 0.00546], p = 0.101733
+  3->2 vs 3->1: -0.00387 [-0.00595, -0.00179], p = 0.000484
+
+Descriptive sensitivity ranks by bin width/jitter width/maximum lag (ms):
+  5/200/50: 1->2
+  5/100/50: 1->2
+  5/200/100: 1->2
+  5/400/50: 1->2
+
+The score measures pairwise lead-lag asymmetry in excess co-spiking.
+A common input with different delays can also produce an asymmetry.
