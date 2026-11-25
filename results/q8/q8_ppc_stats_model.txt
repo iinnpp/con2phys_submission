@@ -1,0 +1,114 @@
+
+Median LFP trace
+Linear mixed-effects model fit by REML
+  Data: model_data 
+        AIC       BIC   logLik
+  -385.6301 -372.1073 199.8151
+
+Random effects:
+ Formula: ~1 | mouse_id
+         (Intercept)    Residual
+StdDev: 0.0009318668 0.000745091
+
+Variance function:
+ Structure: Different standard deviations per stratum
+ Formula: ~1 | brain_area 
+ Parameter estimates:
+        1         2         3 
+ 1.000000  2.836927 44.261717 
+Fixed effects:  ppc ~ 0 + brain_area 
+                 Value   Std.Error DF  t-value p-value
+brain_area1 0.00060103 0.000281221 34 2.137217  0.0399
+brain_area2 0.00241034 0.000544487 34 4.426802  0.0001
+brain_area3 0.03288340 0.007776329 34 4.228653  0.0002
+ Correlation: 
+            brn_r1 brn_r2
+brain_area2 0.315        
+brain_area3 0.022  0.011 
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-1.06349908 -0.49004216 -0.17552157 -0.01193148  3.09955509 
+
+Number of Observations: 54
+Number of Groups: 18 
+
+Joint test of area contrasts and estimated marginal means (mouse-level reference df)
+ df1 df2 F.ratio p.value
+   2  17  14.379  0.0002
+
+       method brain_area n_mice n_units     estimate     lower_95    upper_95
+ median_trace          1     18     649 0.0006010308 7.705985e-06 0.001194356
+ median_trace          2     18     478 0.0024103376 1.261570e-03 0.003559105
+ median_trace          3     18     322 0.0328833970 1.647678e-02 0.049290016
+           se df
+ 0.0002812212 17
+ 0.0005444873 17
+ 0.0077763287 17
+
+Tukey-adjusted pairwise contrasts
+       method area_a area_b n_mice     estimate     lower_95      upper_95
+ median_trace      1      2     18 -0.001809307 -0.003164499 -0.0004541144
+ median_trace      1      3     18 -0.032282366 -0.052228555 -0.0123361772
+ median_trace      2      3     18 -0.030473059 -0.050455078 -0.0104910412
+           se df      p_value  p_adjusted adjustment
+ 0.0005282666 17 0.0032283349 0.008590402      Tukey
+ 0.0077752098 17 0.0006673828 0.001830275      Tukey
+ 0.0077891764 17 0.0011215388 0.003050435      Tukey
+
+Median channel-wise PPC
+Linear mixed-effects model fit by REML
+  Data: model_data 
+       AIC       BIC   logLik
+  -403.413 -389.8902 208.7065
+
+Random effects:
+ Formula: ~1 | mouse_id
+         (Intercept)     Residual
+StdDev: 0.0007453249 0.0002766039
+
+Variance function:
+ Structure: Different standard deviations per stratum
+ Formula: ~1 | brain_area 
+ Parameter estimates:
+         1          2          3 
+  1.000000   7.004028 118.976396 
+Fixed effects:  ppc ~ 0 + brain_area 
+                 Value   Std.Error DF  t-value p-value
+brain_area1 0.00048354 0.000187382 34 2.580508  0.0144
+brain_area2 0.00232997 0.000489263 34 4.762200  0.0000
+brain_area3 0.04473591 0.007758794 34 5.765833  0.0000
+ Correlation: 
+            brn_r1 brn_r2
+brain_area2 0.337        
+brain_area3 0.021  0.008 
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-1.34467365 -0.37335699 -0.11329795  0.07168996  2.97615223 
+
+Number of Observations: 54
+Number of Groups: 18 
+
+Joint test of area contrasts and estimated marginal means (mouse-level reference df)
+ df1 df2 F.ratio p.value
+   2  17  24.257 <0.0001
+
+         method brain_area n_mice n_units     estimate     lower_95
+ median_channel          1     18     649 0.0004835418 8.819955e-05
+ median_channel          2     18     478 0.0023299662 1.297712e-03
+ median_channel          3     18     322 0.0447359104 2.836629e-02
+     upper_95           se df
+ 0.0008788841 0.0001873824 17
+ 0.0033622199 0.0004892625 17
+ 0.0611055341 0.0077587936 17
+
+Tukey-adjusted pairwise contrasts
+         method area_a area_b n_mice     estimate     lower_95      upper_95
+ median_channel      1      2     18 -0.001846424 -0.003029737 -0.0006631112
+ median_channel      1      3     18 -0.044252369 -0.064152044 -0.0243526928
+ median_channel      2      3     18 -0.042405944 -0.062339368 -0.0224725205
+           se df      p_value   p_adjusted adjustment
+ 0.0004612664 17 9.213080e-04 2.514104e-03      Tukey
+ 0.0077570785 17 2.580291e-05 7.301389e-05      Tukey
+ 0.0077702338 17 4.256932e-05 1.200645e-04      Tukey

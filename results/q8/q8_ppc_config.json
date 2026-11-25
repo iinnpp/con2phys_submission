@@ -1,0 +1,37 @@
+{
+  "data_dir": "E:\\con2phys_submission\\dataset_download\\py-files",
+  "mice": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "fs_hz": 500,
+  "lfp_start_s": 0,
+  "band_hz": [
+    4,
+    10
+  ],
+  "filter_order": 3,
+  "neurodsp_version": "2.3.0",
+  "min_spikes": 31,
+  "edge_exclusion_s": 1.0,
+  "phase_padding": "reflect at least one second per edge, to a fast FFT length",
+  "sample_alignment": "nearest sample, after excluding times outside the LFP sample times",
+  "primary": "PPC against the median voltage trace of the unit's brain area",
+  "sensitivity": "median PPC across individual same-area channels with valid scores"
+}

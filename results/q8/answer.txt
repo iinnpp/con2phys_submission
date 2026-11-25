@@ -1,0 +1,37 @@
+Spike-LFP phase locking was estimated from single-unit activity over the entire recording. Each unit was paired
+with the median LFP voltage trace across channels from the same mouse and brain area. This yielded 1,449 units from
+18 mice, with 649 units in area 1, 478 in area 2, and 322 in area 3.
+
+Phase locking was quantified with pairwise phase consistency (PPC), the dimensionless mean cosine of phase
+differences across distinct spike pairs. The LFP was band-pass filtered at 4-10 Hz using NeuroDSP with a
+zero-phase, third-order Butterworth filter. Instantaneous phase was estimated with the Hilbert transform and
+sampled at the 500 Hz LFP sample nearest each spike. Spikes outside the LFP window or within one second of an LFP
+segment boundary were excluded. Each unit needed at least 31 usable spikes.
+
+PPC values were analyzed on their original scale. I averaged PPC within each mouse and brain area and fitted a
+linear mixed-effects model, with brain area as a fixed effect and mouse_id as a
+random intercept. Residual variance was estimated separately for each area. The reference degrees of freedom for
+inference were the number of mice minus one. The overall test of brain area gave F(2, 17) = 14.38, p = 0.0002213.
+Model-estimated mean PPC values were 0.000601 for area 1 (95% CI 0.000008 to 0.001194), 0.002410 for area 2 (95% CI
+0.001262 to 0.003559), and 0.032883 for area 3 (95% CI 0.016477 to 0.049290). Those values are reported in teh table
+above.
+
+Tukey-adjusted pairwise comparisons were reported as differences in mean PPC. In the primary analysis, the area 1
+minus area 2 difference was -0.001809 (95% CI -0.003164 to -0.000454, p = 0.00859), the area 1 minus area 3
+difference was -0.032282 (95% CI -0.052229 to -0.012336, p = 0.00183), and the area 2 minus area 3 difference was
+-0.030473 (95% CI -0.050455 to -0.010491, p = 0.00305).
+
+As a sensitivity check, I calculated each unit's PPC separately against each same-area LFP channel and took the
+median across channels. The model-estimated mean PPC values were 0.000484 for area 1, 0.002330 for area 2, and
+0.044736 for area 3. Area 3 exceeded both other areas in Tukey-adjusted comparisons (p < 0.05). Therefore, brain
+area 3 had the strongest spike-LFP phase locking in the 4-10 Hz range.
+
+Code
+D:/git_repos/con2phys_submission/code/questions/q8_ppc.py
+D:/git_repos/con2phys_submission/code/questions/q8_ppc_plots.ipynb
+D:/git_repos/con2phys_submission/code/questions/q8_ppc_stats.R
+
+Model output
+D:/git_repos/con2phys_submission/results/q8/q8_ppc_stats_model.txt
+D:/git_repos/con2phys_submission/results/q8/q8_ppc_stats_means.csv
+D:/git_repos/con2phys_submission/results/q8/q8_ppc_stats_contrasts.csv
