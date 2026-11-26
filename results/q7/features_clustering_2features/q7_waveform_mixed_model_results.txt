@@ -1,0 +1,70 @@
+Outcome: assignment to the BIC-selected GMM component with the lowest median trough-to-peak duration.
+GMM assignments held fixed. Grouped binomial counts for 1448 units from 18 mice.
+
+Generalized linear mixed model fit by maximum likelihood (Adaptive
+  Gauss-Hermite Quadrature, nAGQ = 9) [glmerMod]
+ Family: binomial  ( logit )
+Formula: cbind(n_short_waveform, n_units - n_short_waveform) ~ brain_area +  
+    (1 | mouse_id)
+   Data: mouse_area
+Control: glmerControl(optimizer = "bobyqa")
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    121.3     129.3     -56.7     113.3        50 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.6054 -0.8734 -0.2181  0.3207  8.6490 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ mouse_id (Intercept) 0.1513   0.389   
+Number of obs: 54, groups:  mouse_id, 18
+
+Fixed effects:
+                 Estimate Std. Error z value Pr(>|z|)    
+(Intercept)       -3.6947     0.2718 -13.595  < 2e-16 ***
+brain_areaArea 2   2.1577     0.2830   7.623 2.48e-14 ***
+brain_areaArea 3   2.4407     0.2896   8.429  < 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) brn_A2
+brain_arAr2 -0.844       
+brain_arAr3 -0.823  0.793
+
+Singular fit: FALSE 
+Pearson residual sum of squares / residual degrees of freedom: 2.655334 
+
+Area likelihood-ratio test
+Data: mouse_area
+Models:
+null_model: cbind(n_short_waveform, n_units - n_short_waveform) ~ (1 | mouse_id)
+model: cbind(n_short_waveform, n_units - n_short_waveform) ~ brain_area + (1 | mouse_id)
+           npar    AIC    BIC   logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+null_model    2 233.12 237.10 -114.560    229.12                         
+model         4 121.33 129.29  -56.668    113.33 115.79  2  < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Model-estimated percentages and pointwise 95% CIs at mouse effect zero
+ brain_area estimate_percent lower_95_percent upper_95_percent
+     Area 1          2.42515          1.43809         4.061779
+     Area 2         17.69692         13.69199        22.566997
+     Area 3         22.19959         17.03578        28.392972
+
+Tukey-adjusted pairwise odds ratios
+         contrast odds_ratio lower_95  upper_95      p_tukey
+ Area 2 vs Area 1   8.651289 4.456342 16.795119 9.303669e-14
+ Area 3 vs Area 1  11.480542 5.824140 22.630438 3.008704e-14
+ Area 3 vs Area 2   1.327033 0.861120  2.045029 2.752497e-01
+
+Sensitivity analysis with an additional random intercept for each mouse-area count
+ Groups        Name        Std.Dev.
+ mouse_area_id (Intercept) 0.75229 
+ mouse_id      (Intercept) 0.27071 
+         contrast odds_ratio  lower_95  upper_95      p_tukey
+ Area 2 vs Area 1  11.622640 4.1325645 32.688116 8.101583e-08
+ Area 3 vs Area 1  17.271582 6.0466384 49.334444 5.971680e-10
+ Area 3 vs Area 2   1.486029 0.6959878  3.172876 4.389925e-01

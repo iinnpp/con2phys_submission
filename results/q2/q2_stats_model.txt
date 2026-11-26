@@ -1,0 +1,52 @@
+Linear mixed-effects model fit by REML
+  Data: data 
+       AIC         BIC   logLik
+  -9.71289 -0.05376218 9.856445
+
+Random effects:
+ Formula: ~1 | mouse_id
+        (Intercept)  Residual
+StdDev:  0.09374386 0.1633741
+
+Fixed effects:  log10_power ~ brain_area 
+                Value  Std.Error DF  t-value p-value
+(Intercept) 2.8566555 0.04439658 34 64.34404       0
+brain_area2 0.9091365 0.05445805 34 16.69426       0
+brain_area3 1.6107605 0.05445805 34 29.57801       0
+ Correlation: 
+            (Intr) brn_r2
+brain_area2 -0.613       
+brain_area3 -0.613  0.500
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.13023929 -0.43866734  0.06451748  0.47682583  3.11402602 
+
+Number of Observations: 54
+Number of Groups: 18 
+
+Overall area effect
+           numDF denDF  F-value p-value
+brain_area     2    34 439.8492  <.0001
+
+Geometric means and pointwise 95% CIs
+ brain_area n_mice power_unit geometric_mean   lower_95   upper_95 log10_mean
+          1     18       uV^2       718.8784   579.4111   891.9162   2.856655
+          2     18       uV^2      5831.6571  4700.2761  7235.3673   3.765792
+          3     18       uV^2     29337.0173 23645.4374 36398.5903   4.467416
+   log10_se df
+ 0.04439658 17
+ 0.04439658 17
+ 0.04439658 17
+
+Power ratios with Tukey-adjusted 95% CIs and p-values
+ area_a area_b ratio_a_over_b   lower_95  upper_95 log10_ratio   log10_se df
+      1      2     0.12327173 0.09066038 0.1676137  -0.9091365 0.05445805 34
+      1      3     0.02450414 0.01802161 0.0333185  -1.6107605 0.05445805 34
+      2      3     0.19878153 0.14619418 0.2702850  -0.7016240 0.05445805 34
+  p_adjusted p_adjusted_upper_bound
+          NA           1.785154e-17
+          NA           2.283733e-25
+ 4.32987e-15                     NA
+
+Q2 answer: Brain area 3 

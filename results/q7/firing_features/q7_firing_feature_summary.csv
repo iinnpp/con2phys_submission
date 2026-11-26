@@ -1,0 +1,7 @@
+brain_area,n_total,n_measured,median,feature
+1,649,649,6.94317558925635,firing_rate_hz
+2,478,478,3.4993798346992993,firing_rate_hz
+3,322,322,4.742381111465251,firing_rate_hz
+1,649,649,54.383333333362316,isi_median_ms
+2,478,478,93.28283809894344,isi_median_ms
+3,322,322,51.39996109915046,isi_median_ms

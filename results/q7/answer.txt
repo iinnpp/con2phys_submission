@@ -1,0 +1,10 @@
+We applied principal component analysis (PCA) separately to each brain area, pooling the 128-sample average waveforms from 
+all 18 mice within each area. We mean-centered each time sample across units and retained the original waveform amplitudes. 
+We applied DBSCAN and Gaussian mixture models (GMMs) to the first two and first three PC scores. For the GMMs, 
+we compared one to eight components with shared or separate covariance matrices and selected the model with the 
+lowest Bayesian information criterion for each area and PC count. At the reference settings, DBSCAN identified 
+one dense cluster per area. The GMMs identified components with median trough-to-peak durations of 0.21–0.23 ms 
+in Areas 2 and 3, while component medians in Area 1 ranged from 0.48 to 0.52 ms. We therefore treated Areas 2 and 
+3 as candidates for the highest proportion of putative fast-spiking units. Their relative ranking depended on 
+whether two or three PCs were included.
+

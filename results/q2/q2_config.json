@@ -1,0 +1,56 @@
+{
+  "data_dir": "E:\\con2phys_submission\\dataset_download\\py-files",
+  "mice": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "areas": [
+    1,
+    2,
+    3
+  ],
+  "fs_hz": 500,
+  "neurodsp_version": "2.3.0",
+  "welch": {
+    "window": "hann",
+    "nperseg": 2000,
+    "noverlap": 1000,
+    "avg_type": "median",
+    "f_range_hz": [
+      0.1,
+      150.0
+    ],
+    "first_frequency_hz": 0.25,
+    "last_frequency_hz": 150.0,
+    "frequency_step_hz": 0.25
+  },
+  "signal_preparation": "supplied full recordings, retaining supplied reference and preprocessing",
+  "channel_qc": "exclude nonfinite or flat traces and invalid PSDs",
+  "channel_aggregation": "pointwise median of linear PSDs",
+  "across_mouse_spectrum": "pointwise median of mouse\u2013area PSDs",
+  "power_integration": "trapezoidal integration of the mouse\u2013area PSD",
+  "power_band_hz": [
+    1.0,
+    100.0
+  ],
+  "input_voltage_unit": "V",
+  "psd_scale_from_stored_signal": 1000000000000.0,
+  "power_unit": "uV^2",
+  "psd_unit": "uV^2/Hz"
+}
