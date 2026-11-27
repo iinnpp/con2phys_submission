@@ -1,0 +1,57 @@
+Either-offset sharp-wave-ripple overlap rates on the highest-count channel
+One selected channel per mouse-area. A ripple qualifies with either deeper offset.
+The selected channel is the one with the most matched candidates in that mouse-area.
+The model uses all eligible mouse-area rows; Mouse 15 has no Area 1 observation.
+The model uses rates in candidates per minute on the original scale.
+
+Linear mixed-effects model fit by REML
+  Data: data 
+       AIC      BIC    logLik
+  283.2154 292.7755 -136.6077
+
+Random effects:
+ Formula: ~1 | mouse_id
+        (Intercept) Residual
+StdDev:    3.380766 2.486902
+
+Fixed effects:  peak_rate_per_min ~ brain_area 
+               Value Std.Error DF  t-value p-value
+(Intercept) 3.618989 1.0033619 33 3.606863  0.0010
+brain_area2 0.506243 0.8457847 33 0.598549  0.5536
+brain_area3 5.039980 0.8457847 33 5.958939  0.0000
+ Correlation: 
+            (Intr) brn_r2
+brain_area2 -0.438       
+brain_area3 -0.438  0.520
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-1.7491808 -0.5800955 -0.1682766  0.5032007  2.5202377 
+
+Number of Observations: 53
+Number of Groups: 18 
+
+Overall area effect
+     effect numerator_df denominator_df        F      p_value
+ brain_area            2             33 22.02967 8.372634e-07
+
+Model-estimated means and pointwise 95% CIs (candidates/min)
+ brain_area n_mice estimated_mean_per_min lower_95_per_min upper_95_per_min
+          1     17               3.618989         1.491956         5.746021
+          2     18               4.125232         2.038146         6.212318
+          3     18               8.658969         6.571882        10.746055
+ arithmetic_observed_mean_per_min se_per_min df
+                         3.410535   1.003362 16
+                         4.125232   0.989227 17
+                         8.658969   0.989227 17
+
+Area differences with Tukey-adjusted p-values and simultaneous 95% CIs
+Tukey adjustment uses the studentized-range approximation for mixed-model contrasts.
+ area_a area_b difference_per_min lower_95_per_min upper_95_per_min se_per_min
+      2      1          0.5062433        -1.569139         2.581625  0.8457847
+      3      1          5.0399801         2.964598         7.115362  0.8457847
+      3      2          4.5337368         2.499621         6.567852  0.8289673
+ df      p_value   p_adjusted adjustment
+ 33 5.535605e-01 8.218541e-01      Tukey
+ 33 1.088576e-06 3.206388e-06      Tukey
+ 33 4.618258e-06 1.354011e-05      Tukey

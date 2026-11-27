@@ -1,0 +1,19 @@
+I first looked for a spectral peak in the 100–200 Hz ripple band using FOOOF. Power dropped sharply near 100 Hz, and I found no clear ripple-band peak in the recording-wide spectra.
+
+I detected sharp-wave candidates separately for each eligible channel using a threshold of 3 standard deviations. Area 3 had the highest average sharp-wave rate across channels and mice. I then detected ripple candidates on individual channels in the 100–180 Hz band using smoothed power thresholds of 3 standard deviations for event onset and 6 for the event peak. I counted a candidate as a putative sharp-wave ripple if it overlapped a sharp wave two or three channels deeper. The channel-by-channel profile in Area 3 resembled the expected hippocampal pattern.
+
+On the highest-count channel in each mouse and area, the pooled median magnitude of the negative trough was 15.8 µV in Area 1, 16.7 µV in Area 2, and 36.8 µV in Area 3. Even in Area 3, the measured amplitudes were small compared with the hundreds of microvolts reported for strong CA1 ripples by Buzsáki et al. (1992, 2003). This is a rough comparison, particularly given the sharp roll-off near 100 Hz in the supplied LFP. For each channel, the detector estimated the mean and standard deviation of smoothed ripple-band power over the full recording from the same attenuated signal. Brief increases in the remaining ripple-band power could therefore exceed the channel's detection threshold even when the absolute voltage was small. The attenuation leaves the identification of individual events uncertain.
+
+I fitted a linear mixed-effects model to the untransformed candidate rates from the channel with the most matched events in each mouse and area. Brain area was a fixed effect, and mouse ID was a random intercept. The model included 53 mouse-area observations from 18 mice and showed an overall effect of brain area (F(2, 33) = 22.03, p = 8.37 × 10^-7). The estimated means were 3.62 candidates per minute for Area 1 (95% CI 1.49–5.75), 4.13 for Area 2 (2.04–6.21), and 8.66 for Area 3 (6.57–10.75).
+
+In Tukey-adjusted pairwise comparisons, Area 3 had 5.04 more candidates per minute than Area 1 (95% CI 2.96–7.12, p = 3.21 × 10^-6) and 4.53 more than Area 2 (2.50–6.57, p = 1.35 × 10^-5). The Area 2 minus Area 1 difference was 0.51 candidates per minute (−1.57 to 2.58, p = 0.822). Area 3 therefore had the highest estimated rate of putative sharp-wave ripples.
+
+Amplitude references
+Buzsáki et al. (1992), High-frequency network oscillation in the hippocampus. https://doi.org/10.1126/science.1589772
+Buzsáki et al. (2003), Hippocampal network patterns of activity in the mouse. https://buzsakilab.com/content/PDFs/Buzsaki_NS03.pdf
+
+R script
+D:\git_repos\con2phys_submission\code\questions\q3_spwr_peak_either_stats.R
+
+Model output
+D:\git_repos\con2phys_submission\results\q3\psd_spwr\q3_spwr_peak_either_stats_model.txt

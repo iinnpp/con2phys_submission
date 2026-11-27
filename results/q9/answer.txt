@@ -1,0 +1,14 @@
+Q9 answer: Brain area 1
+
+The primary analysis used the 25-45 Hz FOOOF aperiodic exponent. A smaller exponent indicates a flatter spectrum and stronger relative excitation.
+The mixed-effects model included 15 complete mice and gave F(2, 28) = 101.16, p < 0.0001.
+Model-estimated exponents: area 1: 1.152 (95% CI 1.003 to 1.301); area 2: 1.943 (95% CI 1.775 to 2.111); area 3: 1.321 (95% CI 1.187 to 1.455) .
+Area 1 had a significantly smaller exponent than both other areas and therefore the strongest relative excitation.
+
+Sensitivity fits (Supplementary Fig. 2 ranges):
+- 15-35 Hz: lowest exponent in area 1; answer = Brain area 1
+- 20-40 Hz: lowest exponent in area 1; answer = Brain area 1
+- 25-45 Hz: lowest exponent in area 1; answer = Brain area 1
+- 30-50 Hz: lowest exponent in area 1; answer = Brain area 1
+
+The aperiodic exponent is a population-level proxy for relative E-I balance, not a direct measurement of synaptic excitation or inhibition.

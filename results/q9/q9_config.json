@@ -1,0 +1,83 @@
+{
+  "paper": {
+    "citation": "Pochinok et al., Nature Communications (2024)",
+    "doi": "10.1038/s41467-024-44983-z",
+    "adaptation": "PSD per channel, then pointwise median within mouse-area"
+  },
+  "data_dir": "E:\\con2phys_submission\\dataset_download\\py-files",
+  "mice": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "areas": [
+    1,
+    2,
+    3
+  ],
+  "fs_hz": 500,
+  "welch": {
+    "window": "hann",
+    "window_seconds": 1.0,
+    "overlap_seconds": 0.25,
+    "nperseg": 500,
+    "noverlap": 125,
+    "detrend": "constant",
+    "scaling": "density",
+    "average_across_windows": "mean",
+    "frequency_resolution_hz": 1.0,
+    "batch_windows": 512
+  },
+  "channel_qc": "exclude nonfinite or flat traces and invalid PSDs",
+  "channel_aggregation": "pointwise median of linear channel PSDs",
+  "fooof": {
+    "version": "1.1.1",
+    "aperiodic_mode": "fixed",
+    "max_n_peaks": 0,
+    "primary_range_hz": [
+      25.0,
+      45.0
+    ],
+    "sensitivity_ranges_hz": [
+      [
+        15.0,
+        35.0
+      ],
+      [
+        20.0,
+        40.0
+      ],
+      [
+        25.0,
+        45.0
+      ],
+      [
+        30.0,
+        50.0
+      ]
+    ],
+    "minimum_r_squared": 0.95
+  },
+  "interpretation": "A smaller aperiodic exponent indicates stronger relative excitation; relative_excitation_proxy is negative exponent.",
+  "input_voltage_unit": "V",
+  "psd_scale_from_stored_signal": 1000000000000.0,
+  "psd_unit": "uV^2/Hz",
+  "numpy_version": "2.5.3",
+  "pandas_version": "3.0.6",
+  "scipy_version": "1.18.1"
+}

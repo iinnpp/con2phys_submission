@@ -1,0 +1,62 @@
+{
+  "method_doi": "10.1038/s41467-024-44983-z",
+  "method": "adapted first power-threshold detector",
+  "historical_implementation": "bu_ripple_detection/get_ripples.m",
+  "event_label": "putative ripple candidate",
+  "input_data": "E:\\con2phys_submission\\dataset_download\\py-files",
+  "mouse_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "areas": [
+    1,
+    2,
+    3
+  ],
+  "sampling_rate_hz": 500,
+  "prep_band_hz": [
+    0.1,
+    200.0
+  ],
+  "ripple_band_hz": [
+    100.0,
+    180.0
+  ],
+  "filter_order_per_bandpass": 3,
+  "filter_application": "cascaded SOS Butterworth, forward-backward, odd padding",
+  "spatial_reference": "supplied reference, each channel independently",
+  "power": "square the narrow-band trace in microvolts, then centered boxcar mean",
+  "boxcar_samples": 5,
+  "boxcar_ms": 10.0,
+  "boxcar_padding": "zeros",
+  "drop_threshold_runs_touching_recording_edges": true,
+  "start_strictly_above_sd": 3.0,
+  "peak_strictly_above_sd": 6.0,
+  "merge_gap_strictly_below_ms": 30,
+  "duration_inclusive_ms": [
+    20,
+    100
+  ],
+  "duration_rule": "spontaneous, bounds adapted from MATLAB at the original sample rate",
+  "baseline": "full-recording mean and sample SD of smoothed power within each channel",
+  "rate_denominator": "full recording in minutes",
+  "row_numbering": "one-based, deepest to superficial",
+  "event_samples": "zero-based indices, stop is exclusive",
+  "lfp_trough": "minimum of 100\u2013180 Hz filtered trace within the detected interval"
+}

@@ -1,0 +1,48 @@
+{
+  "method_doi": "10.1038/s41467-024-44983-z",
+  "event_label": "sharp-wave candidate; ripple overlap not assessed",
+  "mouse_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "brain_areas": [
+    1,
+    2,
+    3
+  ],
+  "input_fs_hz": 500,
+  "detection_fs_hz": 250,
+  "filter_hz": [
+    1,
+    100
+  ],
+  "filter_order": 3,
+  "filter": "zero-phase Butterworth",
+  "channel_spacing_um": 20,
+  "flank_distance_um": 100,
+  "flank_offset_rows": 5,
+  "row_order": "one-based, deepest to most superficial",
+  "bipolar_trace": "more superficial flank minus deeper flank",
+  "threshold_sd": 3,
+  "threshold_baseline": "mean-centered bipolar trace",
+  "min_prominence_sd": 1.5,
+  "max_width_ms": 100,
+  "width_reference": "halfheight",
+  "rate_denominator": "full recording duration in minutes"
+}

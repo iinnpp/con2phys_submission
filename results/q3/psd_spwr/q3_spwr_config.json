@@ -1,0 +1,17 @@
+{
+  "ripple_dir": "D:\\git_repos\\con2phys_submission\\results\\q3\\psd_ripples",
+  "spw_dir": "D:\\git_repos\\con2phys_submission\\results\\q3\\psd_swr",
+  "channel_row_order": "deepest to superficial",
+  "spw_row_offsets": [
+    2,
+    3
+  ],
+  "spw_center_row": "ripple channel row minus offset",
+  "spw_interval": "peak time \u00b1 half of the stored full half-height width",
+  "ripple_interval": "stored start and exclusive stop",
+  "overlap": "intersection longer than 1e-12 seconds",
+  "counting": "one ripple per offset; either is the union and both is the intersection",
+  "eligibility": "ripple and SPW channels valid; either needs one valid offset and both needs two",
+  "rate_denominator": "full recording duration in minutes",
+  "event_label": "overlap of pre-detected ripple and sharp-wave candidates"
+}
